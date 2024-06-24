@@ -9,54 +9,56 @@ document.addEventListener('DOMContentLoaded', function () {
     const downloadLinkContainer = document.getElementById('download-link-container');
 
     startButton.addEventListener('click', async () => {
-        const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+        try {
+            const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
 
-        const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-        const source = audioContext.createMediaStreamSource(stream);
-        const destination = audioContext.createMediaStreamDestination();
-        source.connect(destination);
+            audioPlayback.srcObject = stream;
+            audioPlayback.play();
 
-        audioPlayback.srcObject = stream;
-        audioPlayback.play();
+            mediaRecorder = new MediaRecorder(stream);
 
-        mediaRecorder = new MediaRecorder(destination.stream);
-
-        mediaRecorder.ondataavailable = (event) => {
-            audioChunks.push(event.data);
-        };
-
-        mediaRecorder.onstop = async () => {
-            const audioBlob = new Blob(audioChunks, { type: 'audio/wav' });
-            const audioUrl = URL.createObjectURL(audioBlob);
-            audioPlayback.srcObject = null; 
-            audioPlayback.src = audioUrl;
-
-            const reader = new FileReader();
-            reader.onloadend = () => {
-                voiceDataInput.value = reader.result.split(',')[1];
+            mediaRecorder.ondataavailable = (event) => {
+                audioChunks.push(event.data);
             };
-            reader.readAsDataURL(audioBlob);
 
-            const downloadLink = document.createElement('a');
-            downloadLink.href = audioUrl;
-            downloadLink.download = 'recording.wav';
-            downloadLink.textContent = 'Download recording';
-            downloadLink.classList.add('btn', 'btn-link', 'd-block', 'mt-2');
+            mediaRecorder.onstop = async () => {
+                const audioBlob = new Blob(audioChunks, { type: 'audio/wav' });
+                const audioUrl = URL.createObjectURL(audioBlob);
+                audioPlayback.srcObject = null; 
+                audioPlayback.src = audioUrl;
 
-            downloadLinkContainer.innerHTML = ''; 
-            downloadLinkContainer.appendChild(downloadLink);
-        };
+                // Convert Blob to Base64
+                const reader = new FileReader();
+                reader.onloadend = () => {
+                    voiceDataInput.value = reader.result.split(',')[1];
+                };
+                reader.readAsDataURL(audioBlob);
 
-        mediaRecorder.start();
-        startButton.disabled = true;
-        stopButton.disabled = false;
-        resetButton.disabled = false;
+                const downloadLink = document.createElement('a');
+                downloadLink.href = audioUrl;
+                downloadLink.download = 'recording.wav';
+                downloadLink.textContent = 'Download recording';
+                downloadLink.classList.add('btn', 'btn-link', 'd-block', 'mt-2');
+
+                downloadLinkContainer.innerHTML = ''; 
+                downloadLinkContainer.appendChild(downloadLink);
+            };
+
+            mediaRecorder.start();
+            startButton.disabled = true;
+            stopButton.disabled = false;
+            resetButton.disabled = false;
+        } catch (error) {
+            console.error('Error accessing audio stream:', error);
+        }
     });
 
     stopButton.addEventListener('click', () => {
-        mediaRecorder.stop();
-        startButton.disabled = false;
-        stopButton.disabled = true;
+        if (mediaRecorder) {
+            mediaRecorder.stop();
+            startButton.disabled = false;
+            stopButton.disabled = true;
+        }
     });
 
     resetButton.addEventListener('click', () => {
@@ -67,6 +69,6 @@ document.addEventListener('DOMContentLoaded', function () {
         startButton.disabled = false;
         stopButton.disabled = true;
         resetButton.disabled = true;
-        downloadLinkContainer.innerHTML = ''; // Remove the download link
+        downloadLinkContainer.innerHTML = '';
     });
 });

@@ -15,12 +15,12 @@ class InstructorSeeder extends Seeder
         DB::table('reg_instructors')->truncate();
 
         DB::table('reg_instructors')->insert([
-            [
+            [ 
                 'lastname' => 'Doe',
                 'firstname' => 'John',
                 'middlename' => 'A',
                 'instructor_id' => 'john.doe',
-                'voice_recording' => 'voice_recordings/john_doe.webm',
+                'voice_recording_path' => 'voice_recordings/john_doe.webm',
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -29,7 +29,7 @@ class InstructorSeeder extends Seeder
                 'firstname' => 'Jane',
                 'middlename' => 'B',
                 'instructor_id' => 'jane.smith',
-                'voice_recording' => 'voice_recordings/jane_smith.webm',
+                'voice_recording_path' => 'voice_recordings/jane_smith.webm',
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
