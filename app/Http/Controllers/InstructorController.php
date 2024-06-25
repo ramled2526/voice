@@ -36,7 +36,7 @@ class InstructorController extends Controller
     //     $instructor->save();
 
     //     return redirect()->route('instructor')->with('success', 'Instructor registered successfully.');
-    // }use Illuminate\Http\Request;
+    // }
 
     
 
@@ -47,14 +47,14 @@ public function store(Request $request)
         'firstname' => ['required', 'regex:/^([A-Z][a-z]+)(\s[A-Z][a-z]+)*$/'],
         'middlename' => ['required', 'regex:/^([A-Z][a-z]+)(\s[A-Z][a-z]+)*$|^None$/'],
         'instructor_id' => 'required|string|max:255|unique:reg_instructors,instructor_id',
-        'voice_recording_path' => 'required|string', // Changed to string to handle base64 data
+        // 'voice_recording_path' => 'required|string', // Changed to string to handle base64 data
     ];
 
     $messages = [
         'lastname.regex' => 'Lastname must start with a capital letter.',
         'firstname.regex' => 'Firstname must start with a capital letter.',
         'middlename.regex' => 'Middlename must be a full name or "None".',
-        'voice_recording_path.required' => 'Voice recording is required.',
+        // 'voice_recording_path.required' => 'Voice recording is required.',
     ];
 
     $validated = $request->validate($rules, $messages);

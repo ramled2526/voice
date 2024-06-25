@@ -62,7 +62,7 @@
                         @enderror
                     </div>
                     <div class="mb-3">
-                        <label for="voice-data" class="form-label">Voice Recording</label>
+                        <label for="voice_recording_path" class="form-label">Voice Recording</label>
                         <p class="instructions">Record your voicepass, e.g., your name and birthyear (bermejo2000).</p>
                         <div class="record-buttons mb-2">
                             <button type="button" id="start-recording" class="btn btn-primary btn-sm">Start Recording</button>
@@ -74,7 +74,7 @@
                             <div class="download-link-container" id="download-link-container"></div>
                             <div id="audio-feedback"></div> 
                         </div>
-                        <input type="hidden" id="voice-data" name="voice_recording_path">
+                        <input type="hidden" id="voice_recording_path" name="voice_recording_path">
                     </div>
 
                     <button type="submit" class="btn btn-primary w-100">Register</button>

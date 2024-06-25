@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const stopButton = document.getElementById('stop-recording');
     const resetButton = document.getElementById('reset-recording');
     const audioPlayback = document.getElementById('audio-playback');
-    const voiceDataInput = document.getElementById('voice-data');
+    const voiceDataInput = document.getElementById('voice_recording_path');
     const downloadLinkContainer = document.getElementById('download-link-container');
 
     startButton.addEventListener('click', async () => {
