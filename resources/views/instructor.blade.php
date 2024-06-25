@@ -55,9 +55,9 @@
                         @enderror
                     </div>
                     <div class="form-floating mb-2">
-                        <input type="text" class="form-control @error('instructor_id') is-invalid @enderror" id="instructor_id" name="instructor_id" placeholder="Instructor ID" value="{{ old('instructor_id') }}" required>
+                        <input type="number" class="form-control @error('instructor_id') is-invalid @enderror" id="instructor_id" name="instructor_id" placeholder="Instructor ID" value="{{ old('instructor_id') }}" required>
                         <label for="instructor_id">Instructor ID</label>
-                        @error('instructor_id')  
+                        @error('instructor_id')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
