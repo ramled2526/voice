@@ -27,4 +27,4 @@ return new class extends Migration
             Schema::dropIfExists('reg_instructors');
         }
         
-};
+}; 
