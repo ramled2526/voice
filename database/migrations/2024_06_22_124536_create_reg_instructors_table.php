@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('firstname');
             $table->string('middlename')->nullable();
             $table->string('instructor_id');
-            $table->string('voice-data')->nullable();
+            $table->string('voice_recording_path')->nullable();
             $table->timestamps();
         });
     }
@@ -27,4 +27,4 @@ return new class extends Migration
             Schema::dropIfExists('reg_instructors');
         }
         
-};
+}; 

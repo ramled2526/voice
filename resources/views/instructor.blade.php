@@ -31,8 +31,7 @@
                         </ul>
                     </div>
                 @endif
-
-                <form action="{{ route('reg_instructor.store') }}" method="POST">
+                <form action="{{ route('reg_instructor.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="form-floating mb-2">
                         <input type="text" class="form-control @error('lastname') is-invalid @enderror" id="lastname" name="lastname" placeholder="Lastname" value="{{ old('lastname') }}" required>
@@ -58,7 +57,7 @@
                     <div class="form-floating mb-2">
                         <input type="text" class="form-control @error('instructor_id') is-invalid @enderror" id="instructor_id" name="instructor_id" placeholder="Instructor ID" value="{{ old('instructor_id') }}" required>
                         <label for="instructor_id">Instructor ID</label>
-                        @error('instructor_id')
+                        @error('instructor_id')  
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
@@ -75,7 +74,7 @@
                             <div class="download-link-container" id="download-link-container"></div>
                             <div id="audio-feedback"></div> 
                         </div>
-                        <input type="hidden" id="voice-data" name="voice-data">
+                        <input type="hidden" id="voice-data" name="voice_recording_path">
                     </div>
 
                     <button type="submit" class="btn btn-primary w-100">Register</button>
