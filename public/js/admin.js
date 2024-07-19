@@ -1,4 +1,3 @@
-// admin.js
 
 document.addEventListener("DOMContentLoaded", function() {
     const form = document.querySelector("form");
@@ -25,3 +24,5 @@ document.addEventListener("DOMContentLoaded", function() {
         return re.test(email);
     }
 });
+
+

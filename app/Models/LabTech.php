@@ -9,11 +9,12 @@ class LabTech extends Model
 {
     use HasFactory;
 
+    protected $table = 'reg_technician';
     protected $fillable = [
         'lastname',
         'firstname',
         'middlename',
-        'labtech-id',
-        'voice_data_path',
+        'technician_id',
+        'voice_recording',
     ];
 }

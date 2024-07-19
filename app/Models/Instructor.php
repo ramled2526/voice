@@ -14,6 +14,6 @@ class Instructor extends Model
         'firstname',
         'middlename',
         'instructor_id',
-        'voice_recording_path',
+        'voice_recording',
     ];
 }

@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Student Registration</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <link href="{{ asset('css/student.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/student/student.css') }}" rel="stylesheet">
 </head>
 <body>
     <header class="header text-center py-3 bg-primary text-white d-flex justify-content-start align-items-center px-3">
@@ -34,7 +34,7 @@
                     </div>
                 @endif
 
-                <form action="{{ route('reg_students.store') }}" method="POST">
+                <form action="{{ route('student.save') }}" method="POST">
                     @csrf
                     <div class="form-floating mb-2">
                         <input type="text" class="form-control @error('lastname') is-invalid @enderror" id="lastname" name="lastname" placeholder="Lastname" value="{{ old('lastname') }}" required>

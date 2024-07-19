@@ -1,0 +1,39 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+    .date {
+      cursor: pointer;
+    }
+  
+    .date.other-month {
+      cursor: default;
+    }
+  
+    .error-message {
+      color: red;
+      font-size: 12px;
+    }
+  
+    .form-control.error input,
+    .form-control.error select {
+      border-color: red;
+    }
+  
+    .form-messages.error {
+      color: red;
+    }
+  
+    .form-messages.success {
+      color: green;
+    }
+  
+    .hidden {
+      display: none;
+    }
+  
+    .appointment-date-filled {
+      border-color: green;
+    }
+}

@@ -10,10 +10,10 @@ class StudentSeeder extends Seeder
     public function run(): void
     {
         // Clear the table before seeding
-        DB::table('reg_students')->truncate();
+        DB::table('students')->truncate();
 
         // Seed new data
-        DB::table('reg_students')->insert([
+        DB::table('students')->insert([
             [
                 'lastname' => 'Doe',
                 'firstname' => 'John',

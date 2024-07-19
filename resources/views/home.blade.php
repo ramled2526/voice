@@ -18,15 +18,16 @@
                 <img src="https://img.icons8.com/ios-filled/100/000000/teacher.png" alt="Instructor Role">
                 <span>Instructor</span>
             </div>
-            <div class="role" data-role="lab technician">
+            <div class="role" data-role="technician">
                 <img src="https://img.icons8.com/ios-filled/100/000000/staff.png" alt="Lab Technician Role">
                 <span>Lab Technician</span>
             </div>
         </div>
         <div class="button-container">
             <a href="#" class="btn btn-primary btn-lg btn-continue disabled">Continue</a>
-            <a href="{{ route('admin-login') }}" class="admin-login">Admin Login</a> 
+            <a href="{{ route('admin.login') }}" class="admin-login">Admin Login</a>
         </div>
+            <a href="{{ route('appoint.booking') }}" class="lab-booking">No schedule in open lab? Book here!</a>
     </div>
     <script src="{{ asset('js/script.js') }}"></script>
 </body>

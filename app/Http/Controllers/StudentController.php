@@ -5,20 +5,24 @@ namespace App\Http\Controllers;
 use App\Models\Student;
 use Illuminate\Http\Request;
 
+
 class StudentController extends Controller
 {
+    public function student()
+    {
+        return view ('student.student');
+    }
     public function create()
     {
-        return view('student');
+        return view('student.create');
     }
-
-    public function store(Request $request)
+    public function save(Request $request)
     {
         $rules = [
             'lastname' => ['required', 'regex:/^([A-Z][a-z]+)(\s[A-Z][a-z]+)*$/'],
             'firstname' => ['required', 'regex:/^([A-Z][a-z]+)(\s[A-Z][a-z]+)*$/'],
             'middlename' => ['required', 'regex:/^([A-Z][a-z]+)(\s[A-Z][a-z]+)*$|^None$/'],
-            'student_id' => 'required|string|max:255|unique:reg_students,student_id',
+            'student_id' => 'required|string|max:255|unique:students,student_id',
             'course' => 'required|string|max:255',
             'year_section' => ['required', 'regex:/^[1-4]-[A-Z]$/'],
         ];
@@ -34,6 +38,55 @@ class StudentController extends Controller
 
         Student::create($validated);
 
-        return redirect()->route('student')->with('success', 'Student registered successfully.');
+        return redirect()->route('student.student')->with('success', 'Student registered successfully.');
     }
+    public function index()
+    {
+        $students = Student::all();
+        return view('student.index', compact('students'));
+    }
+    public function edit(Student $student)
+    {
+        return view('student.edit', compact('student'));
+    }
+    public function update(Request $request, Student $student)
+    {
+        $validatedData = $request->validate([
+            'lastname' => 'required',
+            'firstname' => 'required',
+            'middlename' => 'required',
+            'student_id' => 'required|unique:students,student_id,' . $student->id,
+            'course' => 'required',
+            'year_section' => 'required',
+        ]);
+    
+        \Log::info('Validated Data: ', $validatedData);
+    
+        $student->update($validatedData);
+    
+        return redirect()->route('student.index')->with('success', 'Student updated successfully.');
+    }
+    public function delete(Student $student)
+    {
+        $student->delete();
+
+        return redirect()->route('student.index')->with('success', 'Student deleted successfully.');
+    }
+    public function store(Request $request)
+    {
+        
+        $validatedData = $request->validate([
+            'lastname' => 'required|string|max:255',
+            'firstname' => 'required|string|max:255',
+            'middlename' => 'required|string|max:255',
+            'student_id' => 'required|string|max:255|unique:students,student_id',
+            'course' => 'required|string|max:255',
+            'year_section' => 'required|string|max:255',
+        ]);
+
+        Student::create($validatedData);
+
+        return redirect()->back()->with('success', 'Student added successfully.');
+    }
+   
 }

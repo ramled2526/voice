@@ -6,21 +6,46 @@ use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {
+    private $defaultUsername = 'admin@login';
+    private $defaultPassword = 'passAdmin';
+
     public function showLoginForm()
     {
-        return view('admin');  
+        return view('admin.login');
     }
 
     public function login(Request $request)
     {
-        $credentials = $request->only('email', 'password');
+        $request->validate([
+            'username' => 'required|string',
+            'password' => 'required|string',
+        ]);
 
-        if (($credentials)) {
-            return redirect()->intended('/admin-dashboard');
+        if ($request->username === $this->defaultUsername && $request->password === $this->defaultPassword) {
+            // Log the admin in by setting a session variable
+            session(['admin_logged_in' => true]);
+            return redirect()->route('admin.dashboard'); // Redirect to the admin dashboard
         }
 
-        return back()->withErrors([
-            'email' => 'The provided credentials do not match our records.',
-        ]);
+        return back()->withErrors(['login' => 'Invalid credentials.']);
     }
+
+    public function dashboard()
+    {
+        // Ensure this route is protected
+        if (!session('admin_logged_in')) {
+            return redirect()->route('admin.login');
+        }
+
+        return view('admin.dashboard'); // Ensure this view exists
+    }
+
+    public function logout()
+    {
+        session()->forget('admin_logged_in');
+        return redirect()->route('admin.login');
+    }
+
+    
 }
+

@@ -1,0 +1,65 @@
+
+  .date {
+      cursor: pointer;
+  }
+
+  .date.other-month {
+      cursor: default;
+  }
+
+  .error-message {
+      color: red;
+      font-size: 12px;
+  }
+
+  .form-control.error input,
+  .form-control.error select {
+      border-color: red;
+  }
+
+  .form-messages.error {
+      color: red;
+  }
+
+  .form-messages.success {
+      color: green;
+  }
+
+  .date {
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 3px; 
+}
+
+.date.today {
+    background-color: rgb(48, 43, 43); 
+    color: white;
+    width: 40px; 
+    height: 40px; 
+    border-radius: 0px; 
+    font-size: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto; 
+}
+
+.date.selected {
+    background-color: #868388;
+    color:white;
+    border-radius: 0;
+    width: 40px;
+    height: 40px;
+    position: center;
+    justify-content: center;
+}
+
+.appointment-date-filled {
+    background-color: #4f5051; 
+    color: white; 
+}
+
+
+

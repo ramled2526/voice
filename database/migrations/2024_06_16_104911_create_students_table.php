@@ -6,9 +6,12 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
+    /**
+     * Run the migrations.
+     */
     public function up(): void
     {
-        Schema::create('reg_students', function (Blueprint $table) {
+        Schema::create('students', function (Blueprint $table) {
             $table->id();
             $table->string('lastname');
             $table->string('firstname');
@@ -19,9 +22,10 @@ return new class extends Migration
             $table->timestamps();
         });
     }
-
-    public function down(): void
-    {
-        Schema::dropIfExists('reg_students');
-    }
-};
+        
+        public function down()
+        {
+            Schema::dropIfExists('students');
+        }
+    
+}; 

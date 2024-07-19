@@ -11,20 +11,22 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('reg_instructors', function (Blueprint $table) {
+        Schema::create('reg_technician', function (Blueprint $table) {
             $table->id();
             $table->string('lastname');
             $table->string('firstname');
             $table->string('middlename')->nullable();
-            $table->string('instructor_id');
-            $table->string('voice_recording_path')->nullable();
+            $table->string('technician_id');
+            $table->string('voice_recording');
             $table->timestamps();
         });
     }
-        
-        public function down()
-        {
-            Schema::dropIfExists('reg_instructors');
-        }
-        
-}; 
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::dropIfExists('reg_technician');
+    }
+};
