@@ -9,13 +9,12 @@ class CreateAvailabilityTable extends Migration
     {
         Schema::create('availability', function (Blueprint $table) {
             $table->id();
-            $table->date('date');
-            $table->time('start_time');
-            $table->time('end_time');
-            $table->boolean('status')->default(true);
-            $table->timestamps();
-
-            $table->unique(['date', 'start_time', 'end_time']); 
+            $table->date('availability_date'); 
+            $table->string('available_time'); 
+            $table->time('start_time')->nullable(); 
+            $table->time('end_time')->nullable(); 
+            $table->string('status');
+            $table->timestamps(); 
         });
     }
 

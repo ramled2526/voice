@@ -1,0 +1,13 @@
+.selected-date {
+    background-color: #24242a; 
+    color: white;
+}
+
+.availability-info {
+    background-color: rgba(0, 123, 255, 0.1); /* Light blue background */
+    border-radius: 4px;
+    padding: 4px;
+    margin-top: 4px;
+    font-size: 12px;
+    text-align: center;
+}

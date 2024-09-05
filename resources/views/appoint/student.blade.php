@@ -53,10 +53,10 @@
                             <td>
                                 <div class="d-flex flex-column">
                                     <button type="button" class="btn btn-warning btn-sm mb-2" onclick="showEditAppointModal({{ $appoint }})" style="width: 100%;">
-                                        <i class="bi bi-pencil"></i> Edit 
+                                        <i class="bi bi-pencil"></i> Edit
                                     </button>
                                     <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteAppointModal" onclick="setDeleteAppoint({{ $appoint->id }})" style="width: 100%;">
-                                        <i class="bi bi-trash"></i> Delete 
+                                        <i class="bi bi-trash"></i> Delete
                                     </button>
                                 </div>
                             </td>

@@ -1,62 +1,77 @@
-let deleteStudentId;
+let deleteStudentId, deleteInstructorId, deleteTechnicianId, deleteAppointId, deleteAvailId;
 
+document.addEventListener('DOMContentLoaded', function () {
+    // Handle delete student modal
+    const deleteStudentModal = document.getElementById('deleteStudentModal');
+    if (deleteStudentModal) {
+        deleteStudentModal.addEventListener('hidden.bs.modal', function () {
+            deleteStudentId = null;
+        });
+    }
+
+    // Handle delete instructor modal
+    const deleteInstructorModal = document.getElementById('deleteInstructorModal');
+    if (deleteInstructorModal) {
+        deleteInstructorModal.addEventListener('hidden.bs.modal', function () {
+            deleteInstructorId = null;
+        });
+    }
+
+    // Handle delete technician modal
+    const deleteTechnicianModal = document.getElementById('deleteTechnicianModal');
+    if (deleteTechnicianModal) {
+        deleteTechnicianModal.addEventListener('hidden.bs.modal', function () {
+            deleteTechnicianId = null;
+        });
+    }
+
+    // Handle delete appointment modal
+    const deleteAppointModal = document.getElementById('deleteAppointModal');
+    if (deleteAppointModal) {
+        deleteAppointModal.addEventListener('hidden.bs.modal', function () {
+            deleteAppointId = null;
+        });
+    }
+
+    // Handle delete availability modal
+    const deleteAvailModal = document.getElementById('deleteAvailModal');
+    if (deleteAvailModal) {
+        deleteAvailModal.addEventListener('hidden.bs.modal', function () {
+            deleteAvailId = null;
+        });
+    }
+});
+
+// Set delete functions
 function setDeleteStudent(studentId) {
     deleteStudentId = studentId;
     const form = document.getElementById('deleteStudentForm');
-    form.action = `/student/${studentId}`;
+    if (form) form.action = `/student/${studentId}`;
 }
-
-document.addEventListener('DOMContentLoaded', (event) => {
-    const deleteStudentModal = document.getElementById('deleteStudentModal');
-    deleteStudentModal.addEventListener('hidden.bs.modal', (event) => {
-        deleteStudentId = null;
-    });
-});
-
-let deleteInstructorId;
 
 function setDeleteInstructor(instructorId) {
     deleteInstructorId = instructorId;
     const form = document.getElementById('deleteInstructorForm');
-    form.action = `/instructor/${instructorId}`;
+    if (form) form.action = `/instructor/${instructorId}`;
 }
-
-document.addEventListener('DOMContentLoaded', (event) => {
-    const deleteInstructorModal = document.getElementById('deleteInstructorModal');
-    deleteInstructorModal.addEventListener('hidden.bs.modal', (event) => {
-        deleteInstructorId = null;
-    });
-});
-
-let deleteTechnicianId;
 
 function setDeleteTechnician(technicianId) {
     deleteTechnicianId = technicianId;
     const form = document.getElementById('deleteTechnicianForm');
-    form.action = `/technician/${technicianId}`;
+    if (form) form.action = `/technician/${technicianId}`;
 }
-
-document.addEventListener('DOMContentLoaded', (event) => {
-    const deleteTechnicianModal = document.getElementById('deleteTechnicianModal');
-    deleteTechnicianModal.addEventListener('hidden.bs.modal', (event) => {
-        deleteTechnicianId = null;
-    });
-});
-
-let deleteAppointId;
 
 function setDeleteAppoint(appointId) {
     deleteAppointId = appointId;
     const form = document.getElementById('deleteAppointForm');
-    form.action = `/appoint/${appointId}`;
+    if (form) form.action = `/appoint/${appointId}`;
 }
 
-document.addEventListener('DOMContentLoaded', (event) => {
-    const deleteAppointModal = document.getElementById('deleteAppointModal');
-    deleteAppointModal.addEventListener('hidden.bs.modal', (event) => {
-        deleteAppointId = null;
-    });
-});
+function setDeleteAvail(availId) {
+    deleteAvailId = availId;
+    const form = document.getElementById('deleteAvailForm');
+    if (form) form.action = `/availability/${availId}`;
+}
 
 function showEditAppointModal(appoint) {
     document.getElementById('student_id').value = appoint.student_id;
@@ -72,6 +87,19 @@ function showEditAppointModal(appoint) {
     document.getElementById('editAppointForm').action = '/appoint/' + appoint.id;
 
     new bootstrap.Modal(document.getElementById('editAppointModal')).show();
+
+}
+
+function showEditAvailModal(availability) {
+    document.getElementById('availability_date').value = availability.availability_date;
+    document.getElementById('available_time').value = availability.available_time;
+    document.getElementById('start_time').value = availability.start_time;
+    document.getElementById('end_time').value = availability.end_time;
+    document.getElementById('status').value = availability.status;
+
+    document.getElementById('editAvailForm').action = '/availability/' + availability.id;
+
+    new bootstrap.Modal(document.getElementById('editAvailModal')).show();
 
 }
 

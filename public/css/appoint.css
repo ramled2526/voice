@@ -31,35 +31,95 @@
     justify-content: center;
     align-items: center;
     margin: 3px; 
+    position: relative;
 }
 
-.date.today {
+.date-filled {
     background-color: rgb(48, 43, 43); 
-    color: white;
-    width: 40px; 
-    height: 40px; 
-    border-radius: 0px; 
-    font-size: 16px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: auto; 
-}
-
-.date.selected {
-    background-color: #868388;
-    color:white;
-    border-radius: 0;
-    width: 40px;
-    height: 40px;
-    position: center;
-    justify-content: center;
-}
-
-.appointment-date-filled {
-    background-color: #4f5051; 
     color: white; 
 }
 
+#appointment_date.filled {
+    color: #bb1515; 
+}
+
+  #alert-container {
+    background-color: #fff; 
+    color: #333; 
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000;
+    display: none; 
+}
+
+#alert-text {
+    color: #333; 
+}
+
+.confirm-button,
+.cancel-button {
+    background-color: #2a2b2a; 
+    color: white;
+    padding: 5px 10px;
+    margin: 5px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.cancel-button {
+    background-color: #2a2b2a; 
+}
+
+#alert-modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.5s ease, visibility 0.8s ease;
+    z-index: 9999; 
+}
+
+#alert-modal.visible {
+    opacity: 1;
+    pointer-events: auto;
+    visibility: visible;
+}
+
+#alert-modal .modal-content {
+    background: white;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    max-width: 90%;
+    width: 400px;
+    transition: transform 0.3s ease;
+    transform: translateY(-20px);
+}
+
+#alert-modal.visible .modal-content {
+    transform: translateY(0);
+}
+
+.form-messages.success {
+    padding: 10px;
+    color: #b12323;
+    font-size: 15px;
+    background-color: #d4edda;
+    border: 1px solid #c3e6cb;
+}
 
 
+  
+
+  
+  

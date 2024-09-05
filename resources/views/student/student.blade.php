@@ -4,90 +4,112 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Student Registration</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <link href="{{ asset('css/student/student.css') }}" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    @vite('resources/css/tailwind.css')
 </head>
 <body>
-    <header class="header text-center py-3 bg-primary text-white d-flex justify-content-start align-items-center px-3">
-        <a href="/" class="text-white text-decoration-none">&larr; Back</a>
-    </header>
-    <div class="container mt-4">
-        <div class="card mx-auto" style="max-width: 500px;">
-            <div class="card-body">
-                <h2 class="text-center">Student Registration</h2>
+<header class="bg-zinc-600 shadow-lg text-center h-14 flex items-center justify-center mb-6 relative">
+    <a href="/" class="absolute left-4 text-blue-600 hover:text-white text-lg 
+        px-1 py-0 bg-gray-100 hover:bg-blue-600 rounded-md transition duration-300 ease-in-out shadow-sm">
+        &larr; 
+    </a>
+</header>
 
-                <!-- Display the flash message -->
-                @if (session('success'))
-                    <div class="alert alert-success">
-                        {{ session('success') }}
-                    </div>
-                @endif
+<div class="container mx-auto mt-4">
+    <div class="max-w-md mx-auto bg-white shadow-lg rounded-lg overflow-hidden border border-gray-300 bg-gray-50">
+        <div class="p-6">
+            <h2 class="text-2xl font-bold text-center mb-6">Student Registration</h2>
 
-                <!-- Display validation error messages -->
-                @if ($errors->any())
-                    <div class="alert alert-danger">
-                        <ul>
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
-                @endif
+            @if (session('success'))
+                <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-4">
+                    {{ session('success') }}
+                </div>
+            @endif
 
-                <form action="{{ route('student.save') }}" method="POST">
-                    @csrf
-                    <div class="form-floating mb-2">
-                        <input type="text" class="form-control @error('lastname') is-invalid @enderror" id="lastname" name="lastname" placeholder="Lastname" value="{{ old('lastname') }}" required>
-                        <label for="lastname">Lastname</label>
-                        @error('lastname')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                        @enderror
-                    </div>
-                    <div class="form-floating mb-2">
-                        <input type="text" class="form-control @error('firstname') is-invalid @enderror" id="firstname" name="firstname" placeholder="Firstname" value="{{ old('firstname') }}" required>
-                        <label for="firstname">Firstname</label>
-                        @error('firstname')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                        @enderror
-                    </div>
-                    <div class="form-floating mb-2">
-                        <input type="text" class="form-control @error('middlename') is-invalid @enderror" id="middlename" name="middlename" placeholder="Middlename" value="{{ old('middlename') }}" required>
-                        <label for="middlename">Middlename</label>
-                        @error('middlename')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                        @enderror
-                    </div>
-                    <div class="form-floating mb-2">
-                        <input type="text" class="form-control @error('student_id') is-invalid @enderror" id="student_id" name="student_id" placeholder="Student ID" value="{{ old('student_id') }}" required>
-                        <label for="student_id">Student ID</label>
-                        @error('student_id')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                        @enderror
-                    </div>
-                    <div class="form-floating mb-2">
-                        <select class="form-select @error('course') is-invalid @enderror" id="course" name="course" required aria-label="Course">
-                            <option value="" disabled {{ old('course') ? '' : 'selected' }}>Course</option>
-                            <option value="BSIT" @if (old('course') == 'BSIT') selected @endif>Bachelor of Science in Information Technology (BSIT)</option>
-                            <option value="BSCS" @if (old('course') == 'BSCS') selected @endif>Bachelor of Science in Computer Science (BSCS)</option>
-                            <option value="BSIS" @if (old('course') == 'BSIS') selected @endif>Bachelor of Science in Information System (BSIS)</option>
-                            <option value="BLIS" @if (old('course') == 'BLIS') selected @endif>Bachelor of Library and Information Science (BLIS)</option>
-                        </select>
-                        @error('course')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                        @enderror
-                    </div>
-                    <div class="form-floating mb-2">
-                        <input type="text" class="form-control @error('year_section') is-invalid @enderror" id="year_section" name="year_section" placeholder="Year and Section" value="{{ old('year_section') }}" required>
-                        <label for="year_section">Year and Section</label>
-                        @error('year_section')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                        @enderror
-                    </div>
-                    <button type="submit" class="btn btn-primary w-100">Register</button>
-                </form>
-            </div>
+            @if ($errors->any())
+                <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
+                    <ul class="list-disc list-inside">
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+
+            <form id="registrationForm" action="{{ route('student.save') }}" method="POST">
+                @csrf
+                <div class="mb-4">
+                    <input type="text" id="lastname" name="lastname" placeholder="Lastname" value="{{ old('lastname') }}" required
+                        class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 @error('lastname') border-red-500 @enderror h-16">
+                    @error('lastname')
+                        <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                    @enderror
+                </div>
+
+                <div class="mb-4">
+                    <input type="text" id="firstname" name="firstname" placeholder="Firstname" value="{{ old('firstname') }}" required
+                        class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 @error('firstname') border-red-500 @enderror h-16">
+                    @error('firstname')
+                        <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                    @enderror
+                </div>
+
+                <div class="mb-4">
+                    <input type="text" id="middlename" name="middlename" placeholder="Middlename" value="{{ old('middlename') }}" required
+                        class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 @error('middlename') border-red-500 @enderror h-16">
+                    @error('middlename')
+                        <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                    @enderror
+                </div>
+
+                <div class="mb-4">
+                    <input type="text" id="student_id" name="student_id" placeholder="Student ID" value="{{ old('student_id') }}" required
+                        class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 @error('student_id') border-red-500 @enderror h-16">
+                    @error('student_id')
+                        <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                    @enderror
+                </div>
+
+                <div class="mb-4">
+                    <select id="course" name="course" required
+                        class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 @error('course') border-red-500 @enderror appearance-none h-16">
+                        <option value="" disabled {{ old('course') ? '' : 'selected' }}>Course</option>
+                        <option value="BSIT" @if (old('course') == 'BSIT') selected @endif>Bachelor of Science in Information Technology (BSIT)</option>
+                        <option value="BSCS" @if (old('course') == 'BSCS') selected @endif>Bachelor of Science in Computer Science (BSCS)</option>
+                        <option value="BSIS" @if (old('course') == 'BSIS') selected @endif>Bachelor of Science in Information System (BSIS)</option>
+                        <option value="BLIS" @if (old('course') == 'BLIS') selected @endif>Bachelor of Library and Information Science (BLIS)</option>
+                    </select>
+                    @error('course')
+                        <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                    @enderror
+                </div>
+
+                <div class="mb-6">
+                    <input type="text" id="year_section" name="year_section" placeholder="Year and Section" value="{{ old('year_section') }}" required
+                        class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 @error('year_section') border-red-500 @enderror h-16">
+                    @error('year_section')
+                        <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                    @enderror
+                </div>
+
+                <!-- Register Button with Confirmation Modal Trigger -->
+                <button type="button" onclick="showConfirmationModal()" class="w-full bg-blue-400 text-white py-2 hover:bg-blue-500">Register</button>
+            </form>
         </div>
     </div>
-    <script src="{{ asset('js/student.js') }}"></script> 
+</div>
+
+<!-- Confirmation Modal -->
+<div id="confirmationModal" class="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50 hidden">
+    <div class="bg-white p-6 rounded-lg shadow-lg w-80">
+        <h3 class="text-lg font-semibold mb-4">Confirm Registration</h3>
+        <p>Are you sure you want to register?</p>
+        <div class="flex justify-end mt-6">
+            <button onclick="hideConfirmationModal()" class="mr-4 px-4 py-2 bg-gray-300 rounded-md hover:bg-gray-400">No</button>
+            <button onclick="submitRegistrationForm()" class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700">Yes</button>
+        </div>
+    </div>
+</div>
+<script src="{{ asset('js/registration-modal/user-modal.js') }}"></script>
 </body>
 </html>

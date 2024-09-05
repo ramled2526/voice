@@ -15,6 +15,7 @@
     <link href="{{ asset('template/css/styles.css') }}" rel="stylesheet" />
     <link href="{{ asset('css/student/index.css')}}" />
     <link href="{{ asset('css/appoint.css') }}" rel="stylesheet" />
+    <link href="{{ asset('css/availability/avail.css')}}" />
     <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
 </head>
 
@@ -44,6 +45,7 @@
                                 <a class="nav-link" href="{{ route('technician.index') }}">Lab Technicians</a>
                             </nav>
                         </div>
+
                         <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseAppointments"
                             aria-expanded="false" aria-controls="collapseAppointments">
                             <div class="sb-nav-link-icon"><i class="fas fa-calendar-alt"></i></div>
@@ -54,7 +56,33 @@
                             data-bs-parent="#sidenavAccordion">
                             <nav class="sb-sidenav-menu-nested nav">
                                 <a class="nav-link" href="{{ route('appoint.student') }}">View Appointments</a>
-                                <a class="nav-link" href="{{ route('appoint.set')}}">Create Appointment</a>
+                            </nav>
+                        </div>
+
+                         <!-- New Availability Section -->
+                         <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseAvailability"
+                            aria-expanded="false" aria-controls="collapseAvailability">
+                            <div class="sb-nav-link-icon"><i class="fas fa-clock"></i></div>
+                            Availability
+                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                        </a>
+                        <div class="collapse" id="collapseAvailability" aria-labelledby="headingAvailability"
+                            data-bs-parent="#sidenavAccordion">
+                            <nav class="sb-sidenav-menu-nested nav">
+                             <a class="nav-link" href="{{ route('availability.set')}}">Create Availability</a>
+                             <a class="nav-link" href="{{ route('availability.view')}}">View Availability</a>
+                            </nav>
+                        </div>
+                       <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseVoucher"
+                            aria-expanded="false" aria-controls="collapseVoucher">
+                            <div class="sb-nav-link-icon"><i class="fas fa-ticket-alt"></i></div>
+                            Voucher
+                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                        </a>
+                        <div class="collapse" id="collapseVoucher" aria-labelledby="headingVoucher"
+                            data-bs-parent="#sidenavAccordion">
+                            <nav class="sb-sidenav-menu-nested nav">
+                                <a class="nav-link" href="{{ route('voucher.generate')}}">Generate Code</a>
                             </nav>
                         </div>
                         <div class="sb-sidenav-menu-heading">Settings</div>
@@ -79,10 +107,8 @@
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
     <script src="{{ asset('template/js/scripts.js') }}"></script>
-    <script src="{{ asset('js/student.js') }}"></script>
-    <script src="{{ asset('js/dashboard.js') }}"></script>
-    <script src="{{ asset('js/appoint.js') }}"></script>
-    <script src="{{ asset('js/admin-calendar.js') }}"></script>
+    <script src="{{ asset('js/admin/operation/crud.js') }}"></script>
+    <script src="{{ asset('js/admin/availability/admin-availability.js') }}"></script>
     <script src="{{ asset('template/js/database-simple-demo.js') }}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js" crossorigin="anonymous"></script>

@@ -8,16 +8,16 @@ use Illuminate\Database\Eloquent\Model;
 class Appointment extends Model
 {
     use HasFactory;
-    protected $table = 'appointments';
+    protected $table = 'appointment';
     protected $fillable = [
-        'student_id',
-        'firstname',
-        'lastname',
-        'middlename',
-        'course',
-        'year_section',
-        'start_time',
-        'end_time',
-        'appointment_date',
+        'student_id', 
+        'firstname', 
+        'lastname', 
+        'middlename', 
+        'course', 
+        'year_section', 
+        'start_time', 
+        'end_time', 
+        'appointment_date'
     ];
 }

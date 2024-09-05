@@ -4,9 +4,12 @@ export default {
     "./resources/**/*.blade.php",
     "./resources/**/*.js",
     "./resources/**/*.vue",
+    "./public/**/*.css",
   ],
   theme: {
     extend: {},
   },
-  plugins: [],
+  plugins: [
+    require('@tailwindcss/line-clamp'),
+  ],
 }

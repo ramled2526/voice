@@ -12,97 +12,133 @@
 </head>
 
 <body class="bg-gray-200 font-sans">
-    <div class="content mx-auto max-w-screen-lg py-8 px-4 md:py-24 md:px-0">
-        <h2 class="text-center text-3xl font-bold mb-8">Make an appointment</h2>
-        <div class="flex flex-col md:flex-row gap-6">
-            <div class="calendar-container bg-white shadow-lg overflow-hidden w-full md:w-80 md:max-w-xs lg:max-w-sm xl:w-1/2 xl:max-w-md">
-                <header class="bg-purple-600 text-white py-4 text-center">
+    <div class="flex flex-col min-h-screen">
+        <!-- Header -->
+        <header class="bg-white shadow text-center h-14 flex items-center justify-center mb-6 relative">
+            <!-- Back Button -->
+            <a href="/" class="absolute left-4 text-blue-600 hover:text-white text-lg 
+                px-1 py-0 bg-gray-100 hover:bg-blue-600 rounded-md transition duration-300 ease-in-out shadow-sm">
+                &larr; 
+            </a>
+            <h2 class="text-xl font-bold leading-relaxed">Make an Appointment</h2>
+        </header>
+
+        <!-- Main Content -->
+        <main class="flex-grow flex flex-col items-center py-8 px-4 md:px-8">
+            <!-- Calendar Container -->
+            <div class="calendar-container bg-white shadow-lg overflow-hidden w-full max-w-4xl lg:max-w-5xl xl:max-w-6xl">
+                <header class="bg-blue-300 text-white py-4 text-center">
                     <div class="flex justify-between items-center px-4">
                         <button id="prev-month" class="text-xl">&lt;</button>
                         <span id="month-year" class="text-xl font-bold"></span>
                         <button id="next-month" class="text-xl">&gt;</button>
                     </div>
                 </header>
-                <div class="grid grid-cols-7 gap-2 p-2">
-                    <div class="day text-center py-2 font-bold">Sun</div>
-                    <div class="day text-center py-2 font-bold">Mon</div>
-                    <div class="day text-center py-2 font-bold">Tue</div>
-                    <div class="day text-center py-2 font-bold">Wed</div>
-                    <div class="day text-center py-2 font-bold">Thu</div>
-                    <div class="day text-center py-2 font-bold">Fri</div>
-                    <div class="day text-center py-2 font-bold">Sat</div>
+                <div class="grid grid-cols-7 gap-6 md:gap-16 p-2">
+                    <div class="day text-center py-1 md:py-2 font-bold">Sun</div>
+                    <div class="day text-center py-1 md:py-2 font-bold">Mon</div>
+                    <div class="day text-center py-1 md:py-2 font-bold">Tue</div>
+                    <div class="day text-center py-1 md:py-2 font-bold">Wed</div>
+                    <div class="day text-center py-1 md:py-2 font-bold">Thu</div>
+                    <div class="day text-center py-1 md:py-2 font-bold">Fri</div>
+                    <div class="day text-center py-1 md:py-2 font-bold">Sat</div>
                 </div>
-                <div id="dates" class="dates grid grid-cols-7 gap-2 p-2"></div>
+                <div id="dates" class="dates grid grid-cols-7 gap-6 md:gap-16 p-2"></div>
             </div>
-
-            <div id="appointment-form" class="bg-white shadow-lg p-6 rounded-lg w-full md:w-1/2 lg:w-2/3 xl:w-1/2">
-                <h3 class="text-xl font-bold mb-4 text-center">Book Appointment</h3>
-                <div id="form-messages" class="form-messages text-red-500 font-bold mb-4"></div>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div class="form-control">
-                        <input type="text" id="student_id" placeholder="Student ID" class="input-field border-2 border-gray-300 rounded-md p-2 w-full">
-                        <div class="error-message text-red-500"></div>
-                    </div>
-                    <div class="form-control">
-                        <input type="text" id="firstname" placeholder="Firstname" class="input-field border-2 border-gray-300 rounded-md p-2 w-full">
-                        <div class="error-message text-red-500"></div>
-                    </div>
-                    <div class="form-control">
-                        <input type="text" id="lastname" placeholder="Lastname" class="input-field border-2 border-gray-300 rounded-md p-2 w-full">
-                        <div class="error-message text-red-500"></div>
-                    </div>
-                    <div class="form-control">
-                        <input type="text" id="middlename" placeholder="Middlename" class="input-field border-2 border-gray-300 rounded-md p-2 w-full">
-                        <div class="error-message text-red-500"></div>
-                    </div>
-                    <div class="form-control">
-                        <select id="course" class="input-field border-2 border-gray-300 rounded-md p-2 w-full bg-white appearance-none">
-                            <option value="" disabled selected hidden>Course</option>
-                            <option value="BSIT">BSIT</option>
-                            <option value="BSCS">BSCS</option>
-                            <option value="BSIS">BSIS</option>
-                            <option value="BLIS">BLIS</option>
-                        </select>
-                        <div class="error-message text-red-500"></div>
-                    </div>
-                    <div class="form-control">
-                        <input type="text" id="year_section" placeholder="Year and Section" class="input-field border-2 border-gray-300 rounded-md p-2 w-full">
-                        <div class="error-message text-red-500"></div>
-                    </div>
-                    <div class="form-control">
-                        <select id="start_time" class="input-field border-2 border-gray-300 rounded-md p-2 w-full bg-white appearance-none">
-                            <option value="" disabled selected hidden>Start Time</option>
-                        </select>
-                        <div class="error-message text-red-500"></div>
-                    </div>
-                    <div class="form-control">
-                        <select id="end_time" class="input-field border-2 border-gray-300 rounded-md p-2 w-full bg-white appearance-none">
-                            <option value="" disabled selected hidden>End Time</option>
-                        </select>
-                        <div class="error-message text-red-500"></div>
-                    </div>
-                    <div class="form-control col-span-2">
-                        <input type="date" id="appointment_date" placeholder="Appointment Date" readonly class="input-field border-2 border-gray-300 rounded-md p-2 w-full">
-                        <div class="error-message text-red-500"></div>
-                    </div>
+            <!-- Appointment Form -->
+            <div id="appointment-form" class="hidden fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50 p-4">
+                <div class="bg-white shadow-lg p-6 rounded-lg w-full max-w-lg md:w-3/4 lg:w-1/2 xl:w-1/3">
+                    <h3 class="text-xl font-bold mb-4 text-center">Book Appointment</h3>
+                    <div id="form-messages" class="form-messages text-red-500 font-bold mb-4"></div>
+                    <form>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                            <div class="form-control">
+                                <input type="text" id="student_id" name="student_id" placeholder="Student ID" class="input-field border border-gray-300 rounded-md p-2 w-full text-sm">
+                                <div class="error-message text-red-500"></div>
+                            </div>
+                            <div class="form-control">
+                                <input type="text" id="firstname" name="firstname" placeholder="Firstname" class="input-field border border-gray-300 rounded-md p-2 w-full text-sm">
+                                <div class="error-message text-red-500"></div>
+                            </div>
+                            <div class="form-control">
+                                <input type="text" id="lastname" name="lastname" placeholder="Lastname" class="input-field border border-gray-300 rounded-md p-2 w-full text-sm">
+                                <div class="error-message text-red-500"></div>
+                            </div>
+                            <div class="form-control">
+                                <input type="text" id="middlename" name="middlename" placeholder="Middlename" class="input-field border border-gray-300 rounded-md p-2 w-full text-sm">
+                                <div class="error-message text-red-500"></div>
+                            </div>
+                            <div class="form-control">
+                                <select id="course" name="course" class="input-field border border-gray-300 rounded-md p-2 w-full text-sm appearance-none text-gray-500">
+                                    <option value="" disabled selected hidden>Course</option>
+                                    <option value="BSIT">BSIT</option>
+                                    <option value="BSCS">BSCS</option>
+                                    <option value="BSIS">BSIS</option>
+                                    <option value="BLIS">BLIS</option>
+                                </select>
+                                <div class="error-message text-red-500"></div>
+                            </div>
+                            <div class="form-control">
+                                <input type="text" id="year_section" name="year_section" placeholder="Year and Section" class="input-field border border-gray-300 rounded-md p-2 w-full text-sm">
+                                <div class="error-message text-red-500"></div>
+                            </div>
+                            <div class="form-control">
+                                <select id="start_time" name="start_time" class="input-field border border-gray-300 rounded-md p-2 w-full text-sm bg-white appearance-none text-gray-500">
+                                    <option value="" disabled selected hidden>Start Time</option>
+                                </select>
+                                <div class="error-message text-red-500"></div>
+                            </div>
+                            <div class="form-control">
+                                <select id="end_time" name="end_time" class="input-field border border-gray-300 rounded-md p-2 w-full text-sm bg-white appearance-none text-gray-500">
+                                    <option value="" disabled selected hidden>End Time</option>
+                                </select>
+                                <div class="error-message text-red-500"></div>
+                            </div>
+                            <div class="form-control col-span-2">
+                                <input type="date" id="appointment_date" name="appointment_date" placeholder="Appointment Date" readonly class="input-field border border-gray-300 rounded-md p-2 w-full text-sm">
+                                <div class="error-message text-red-500"></div>
+                            </div>
+                        </div>
+                        <div class="form-buttons flex flex-col md:flex-row gap-4 justify-center mt-4">
+                            <button type="submit" id="book-appointment" class="bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition-all duration-200 w-full md:w-auto text-sm">Book Appointment</button>
+                            <button type="button" id="back-button" class="bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition-all duration-200 w-full md:w-auto mt-2 md:mt-0 text-sm">Back</button>
+                        </div>
+                    </form>
                 </div>
-                <div class="form-buttons flex flex-col md:flex-row gap-4 justify-center mt-4">
-                    <button id="book-appointment" class="bg-purple-600 text-white py-2 px-4 rounded-md hover:bg-purple-600 transition-all duration-200 w-full md:w-auto">Book Appointment</button>
-                    <button id="back-button" class="bg-gray-500 text-white py-2 px-4 rounded-md hover:bg-gray-600 transition-all duration-200 w-full md:w-auto mt-2 md:mt-0">Back</button>
+            </div>
+        </main>
+
+        <!-- Confirmation Modal -->
+        <div id="alert-modal" class="hidden fixed z-50 inset-0 overflow-y-auto bg-white-600 bg-opacity-95" style="transition: opacity 0.4s;">
+            <div class="flex items-center justify-center min-h-screen" style="transition: transform 0.3s;">
+                <div class="bg-white rounded-lg overflow-hidden shadow-xl transform sm:max-w-lg sm:w-full">
+                    <div class="bg-white p-6">
+                        <h3 class="text-lg leading-6 font-medium" id="alert-text" style="color: black;">Are you sure you want to book this appointment?</h3>
+                        <div id="alert-details" class="mt-2 text-black"></div>
+                    </div>
+                    <div class="bg-blue-800 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+                        <button id="confirm-button" class="w-full inline-flex justify-center rounded-md border border-white-500 shadow-sm px-4 py-2 bg-black-600 text-base font-medium text-white hover:bg-gray-800 focus:outline-none sm:ml-3 sm:w-auto sm:text-sm">
+                            Confirm
+                        </button>
+                        <button id="cancel-button" class="mt-3 w-full inline-flex justify-center rounded-md border border-white-500 shadow-sm px-4 py-2 bg-black-600 text-base font-medium text-white hover:bg-gray-800 focus:outline-none sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">
+                            Cancel
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <div id="alert-container" class="hidden fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-gray-900 border border-gray-300 p-4 rounded-lg shadow-lg w-full md:w-auto max-w-sm text-center text-white z-50">
-        <div id="alert-message">
-            <div id="alert-text"></div>
-            <div id="ok-button-container">
-                <button id="ok-button" class="ok-button bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition-all duration-200">OK</button>
-            </div>
+        <!-- Success Modal -->
+        <div id="success-modal" class="modal hidden fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+            <div class="modal-content bg-white p-6 rounded-lg shadow-lg relative">
+                <h2 class="text-2xl font-bold mb-4">Appointment Booked Successfully</h2>
+                <p class="mb-4">Note: Please follow your set schedule, when the time starts it expires after 4 hours.</p>
+                <div class="flex justify-end">
+            <button id="success-ok" class="bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700">OK</button>
         </div>
     </div>
-    <script src="{{ asset('js/calendar.js') }}"></script>
+</div>
+    <script src="{{ asset('js/admin/appointment/appoint.js') }}"></script>
 </body>
 
 </html>

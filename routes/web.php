@@ -7,9 +7,9 @@ use App\Http\Controllers\InstructorController;
 use App\Http\Controllers\LabTechnicianController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\BookingController;
 use App\Http\Controllers\AppointmentController;
 use App\Http\Controllers\AvailabilityController;
+use App\Http\Controllers\VoucherController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -45,16 +45,26 @@ Route::post('/admin-login', [AdminController::class, 'login'])->name('admin-logi
 Route::post('/admin-logout', [AdminController::class, 'logout'])->name('admin-logout');
 Route::get('/admin.dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
 
-Route::get('/appoint/booking', [BookingController::class, 'show'])->name('appoint.booking');
-Route::post('/appointments', [AppointmentController::class, 'save']);
+Route::get('/appoint/booking', [AppointmentController::class, 'show'])->name('appoint.booking');
+Route::post('/appointment', [AppointmentController::class, 'store']);
+Route::get('/availability/{year}/{month}', [AppointmentController::class, 'fetchAvailability']);
 Route::get('/appoint.student', [AppointmentController::class, 'index'])->name('appoint.student');
 Route::get('/appoint.edit', [AppointmentController::class, 'edit'])->name('appoint.edit');
 Route::put('/appoint/{appoint}', [AppointmentController::class, 'update'])->name('appoint.update');
 Route::delete('/appoint/{appoint}', [AppointmentController::class, 'delete'])->name('appoint.delete');
+Route::get('/availability/{date}', [AppointmentController::class, 'getAvailabilityByDate']);
 
-Route::post('/appoint.set', [AvailabilityController::class, 'set'])->name('appoint.set');
-Route::get('/appoint.set', [AvailabilityController::class, 'show'])->name('appoint.set');
-Route::get('/availability', [AvailabilityController::class, 'getAvailability'])->name('availability.get');
+Route::post('/availability', [AvailabilityController::class, 'saveAvailability']);
+Route::get('/availability.set', [AvailabilityController::class, 'show'])->name('availability.set');
+Route::get('/availability/{date}', [AvailabilityController::class, 'getAvailabilityForDate']);
+Route::get('/availability.view', [AvailabilityController::class, 'index'])->name('availability.view');
+Route::get('/availability.edit', [AvailabilityController::class, 'edit'])->name('availability.edit');
+Route::put('/availability/{availability}', [AvailabilityController::class, 'update'])->name('availability.update');
+Route::delete('/availability/{id}', [AvailabilityController::class, 'delete'])->name('availability.delete');
+
+Route::get('/voucher/generate', [VoucherController::class, 'generate'])->name('voucher.generate');
+Route::post('/voucher', [VoucherController::class, 'store']);
+
 
 
 

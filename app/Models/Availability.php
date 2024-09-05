@@ -11,10 +11,11 @@ class Availability extends Model
     protected $table = 'availability';
 
     protected $fillable = [
-        'date',
-        'start-time',
-        'end-time',
-        'status'
+        'availability_date',
+        'available_time',
+        'start_time',
+        'end_time',
+        'status',
     ];
 
 }
