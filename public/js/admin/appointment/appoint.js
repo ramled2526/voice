@@ -50,52 +50,56 @@ document.addEventListener("DOMContentLoaded", function () {
         successOkButton.addEventListener("click", hideSuccessModal);
     }
 
-    function populateTimeDropdowns(availability) {
+    function populateTimeDropdowns() {
         const startTimeSelect = document.getElementById("start_time");
         const endTimeSelect = document.getElementById("end_time");
-
+    
+        const timeslots = generateTimeSlots();
+    
         // Clear existing options
-        startTimeSelect.innerHTML = '<option value="">Select Start Time</option>';
-        endTimeSelect.innerHTML = '<option value="">Select End Time</option>';
-
-        if (!availability) {
-            // If no availability, do not populate the dropdowns
-            return;
-        }
-
-        const availableTimes = availability.available_time.split(","); // Split the available times by commas
-        const startTimeOptions = [];
-        const endTimeOptions = [];
-
-        availableTimes.forEach(timeRange => {
-            const [start, end] = timeRange.split(" - ");
-            if (start && end) { // Ensure both start and end times are present
-                const startTimeFormatted = formatTimeForDisplay(start.trim());
-                const endTimeFormatted = formatTimeForDisplay(end.trim());
-
-                // Add options for start and end times
-                startTimeOptions.push(`<option value="${start.trim()}">${startTimeFormatted}</option>`);
-                endTimeOptions.push(`<option value="${end.trim()}">${endTimeFormatted}</option>`);
-            }
+        startTimeSelect.innerHTML = "";
+        endTimeSelect.innerHTML = "";
+    
+        // Add placeholder options
+        startTimeSelect.innerHTML += `<option value="" disabled selected>Select start time</option>`;
+        endTimeSelect.innerHTML += `<option value="" disabled selected>Select end time</option>`;
+    
+        // Populate the dropdowns with time slots
+        timeslots.forEach(time => {
+            startTimeSelect.innerHTML += `<option value="${time.value}">${time.label}</option>`;
+            endTimeSelect.innerHTML += `<option value="${time.value}">${time.label}</option>`;
         });
-
-        // Populate the dropdowns with the available times
-        startTimeSelect.innerHTML += startTimeOptions.join('');
-        endTimeSelect.innerHTML += endTimeOptions.join('');
     }
-
-      function renderCalendar(date) {
+    
+    function generateTimeSlots() {
+        const timeslots = [];
+        const startHour = 0; // Start at 12:00 AM (00:00 in 24-hour format)
+        const endHour = 23;  // End at 11:00 PM (23:00 in 24-hour format)
+    
+        for (let hour = startHour; hour <= endHour; hour++) {
+            const timeValue = `${hour.toString().padStart(2, '0')}:00`; // 24-hour format
+            const hour12 = (hour % 12) || 12;  // Convert to 12-hour format
+            const ampm = hour < 12 ? "AM" : "PM";
+            const timeLabel = `${hour12}:00 ${ampm}`; // Display in 12-hour format with AM/PM
+    
+            timeslots.push({ value: timeValue, label: timeLabel });
+        }
+    
+        return timeslots;
+    }
+    
+    function renderCalendar(date) {
         datesContainer.innerHTML = "";
         const year = date.getFullYear();
         const month = date.getMonth();
         const today = new Date();
-    
+
         monthYearDisplay.textContent = `${months[month]} ${year}`;
-    
+
         const firstDayOfMonth = new Date(year, month, 1).getDay();
         const lastDateOfMonth = new Date(year, month + 1, 0).getDate();
         const lastDateOfLastMonth = new Date(year, month, 0).getDate();
-    
+
         fetch(`/availability/${year}/${month + 1}`)
             .then(response => response.json())
             .then(data => {
@@ -152,11 +156,10 @@ document.addEventListener("DOMContentLoaded", function () {
                             dateElement.classList.add("selected");
                             selectedDateElement = dateElement;
 
-                            // Check availability and populate dropdowns accordingly
                             if (availability) {
                                 populateTimeDropdowns(availability);
                             } else {
-                                populateTimeDropdowns(null); // No availability for this date
+                                populateTimeDropdowns();
                             }
                         });
                     }
@@ -180,20 +183,20 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function formatTimeForDisplay(timeString) {
         if (!timeString) return "";
-    
+
         const timeParts = timeString.match(/^(\d{1,2}):(\d{2})(?::(\d{2}))?$/);
         if (timeParts) {
             let hours = parseInt(timeParts[1], 10);
             const minutes = parseInt(timeParts[2], 10);
             const isPM = hours >= 12;
-    
+
             hours = hours % 12 || 12;
-    
+
             return `${hours}:${minutes < 10 ? '0' + minutes : minutes} ${isPM ? 'PM' : 'AM'}`;
         }
-    
+
         return timeString; 
-    }    
+    }
 
 function displayError(input, message) {
     const formControl = input.parentElement;
@@ -260,6 +263,21 @@ function validateYearSection(yearSection) {
     return /^[1-4]-[A-Z]$/.test(yearSection);
 }
 
+function validateTimeRange(startTime, endTime) {
+    const [startHours, startMinutes] = startTime.split(':').map(Number);
+    const [endHours, endMinutes] = endTime.split(':').map(Number);
+
+    // Calculate the total minutes for start and end times
+    const startTotalMinutes = startHours * 60 + startMinutes;
+    const endTotalMinutes = endHours * 60 + endMinutes;
+
+    // Calculate the difference in minutes
+    const differenceInMinutes = endTotalMinutes - startTotalMinutes;
+
+    // Return true if the difference is less than or equal to 240 minutes (4 hours)
+    return differenceInMinutes > 0 && differenceInMinutes <= 240;
+}
+
 function confirmBooking(appointmentData) {
     const formattedStartTime = formatTimeForDisplay(appointmentData.start_time);
     const formattedEndTime = formatTimeForDisplay(appointmentData.end_time);
@@ -280,11 +298,9 @@ function resetForm() {
         element.classList.remove('filled');
     });
 
-    // Clear error and form messages
     clearErrors();
     formMessages.innerText = '';
 
-    // Deselect the previously selected date
     if (selectedDateElement) {
         selectedDateElement.classList.remove('selected');
         selectedDateElement = null;
@@ -303,11 +319,8 @@ function bookAppointment(data) {
         .then(response => response.json())
         .then(data => {
             if (data.success) {
-                // Clear the form before showing the success modal
                 resetForm();
-                // Show the success modal
                 showSuccessModal();
-                // Re-render the calendar to reflect the new appointments
                 renderCalendar(currentDate);
             } else {
                 displayFormMessage(data.message, 'error');
@@ -317,7 +330,6 @@ function bookAppointment(data) {
             console.error('Error:', error);
         });
 }
-
 
 bookAppointmentButton.addEventListener("click", function (e) {
     e.preventDefault();
@@ -366,11 +378,10 @@ bookAppointmentButton.addEventListener("click", function (e) {
         displayError(document.getElementById("end_time"), "End time is required.");
         isValid = false;
     }
-    if (!validateTimeRange(appointmentData.start_time, appointmentData.end_time)) {
+    if (appointmentData.start_time && appointmentData.end_time && !validateTimeRange(appointmentData.start_time, appointmentData.end_time)) {
         displayError(document.getElementById("end_time"), "Time range should not exceed 4 hours.");
         isValid = false;
     }
-
     if (isValid) {
         confirmBooking(appointmentData);
     }

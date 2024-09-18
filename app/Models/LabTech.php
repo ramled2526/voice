@@ -11,10 +11,11 @@ class LabTech extends Model
 
     protected $table = 'reg_technician';
     protected $fillable = [
-        'lastname',
-        'firstname',
-        'middlename',
+        'technician_lastname',
+        'technician_firstname',
+        'technician_middlename',
         'technician_id',
         'voice_recording',
     ];
+    protected $hidden = ['audio_data'];
 }

@@ -13,18 +13,20 @@ return new class extends Migration
     {
         Schema::create('reg_instructors', function (Blueprint $table) {
             $table->id();
-            $table->string('lastname');
-            $table->string('firstname');
-            $table->string('middlename')->nullable();
-            $table->string('instructor_id');
-            $table->string('voice_recording');
+            $table->string('instructor_lastname');
+            $table->string('instructor_firstname');
+            $table->string('instructor_middlename')->nullable();
+            $table->string('instructor_id')->unique();
+            $table->string('voice_recording')->nullable(); // Store file path as a string
             $table->timestamps();
         });
     }
-        
-        public function down()
-        {
-            Schema::dropIfExists('reg_instructors');
-        }
-       
-}; 
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::dropIfExists('reg_instructors');
+    }
+};

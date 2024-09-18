@@ -11,7 +11,6 @@ class AvailabilityController extends Controller
     {
         return view('availability.set');
     }
-
     public function saveAvailability(Request $request)
     {
         \Log::info('Availability data received:', $request->all());
@@ -25,23 +24,28 @@ class AvailabilityController extends Controller
         ]);
     
         try {
-            $availability = new Availability();
-            $availability->availability_date = $validatedData['availability_date'];
-            $availability->available_time = $validatedData['available_time'];
-    
-            // Convert times to 12-hour format
-            $availability->start_time = $this->formatTime($validatedData['start_time']);
-            $availability->end_time = $this->formatTime($validatedData['end_time']);
+            $startTime = \DateTime::createFromFormat('H:i', $validatedData['start_time']);
+            $endTime = \DateTime::createFromFormat('H:i', $validatedData['end_time']);
             
-            $availability->status = $validatedData['status']; 
-            $availability->save();
+            if ($startTime && $endTime && $startTime < $endTime) {
+                $formattedStartTime = $startTime->format('g:i a'); 
+                $formattedEndTime = $endTime->format('g:i a-'); 
+                
+                // Save the availability as a single entry
+                $availability = new Availability();
+                $availability->availability_date = $validatedData['availability_date'];
+                $availability->available_time = $validatedData['available_time']; // Keep available_time as it is
+                $availability->start_time = $formattedStartTime; // Save formatted start time
+                $availability->end_time = $formattedEndTime; // Save formatted end time
+                $availability->status = $validatedData['status']; 
+                $availability->save();
+            }
     
             return response()->json(['success' => true, 'message' => 'Availability saved successfully.'], 200);
         } catch (\Exception $e) {
             return response()->json(['success' => false, 'message' => 'Failed to save availability.'], 500);
         }
     }
-    
     private function formatTime($time)
     {
         if ($time) {
@@ -49,8 +53,7 @@ class AvailabilityController extends Controller
             return $dt->format('g:i a');
         }
         return null;
-    }
-    
+    }    
     public function getAvailabilityForDate($date)
 {
     try {
@@ -114,3 +117,16 @@ class AvailabilityController extends Controller
     
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+

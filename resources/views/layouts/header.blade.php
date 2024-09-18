@@ -83,6 +83,7 @@
                             data-bs-parent="#sidenavAccordion">
                             <nav class="sb-sidenav-menu-nested nav">
                                 <a class="nav-link" href="{{ route('voucher.generate')}}">Generate Code</a>
+                                <a class="nav-link" href="{{ route('voucher.index')}}">View Generated Code</a>
                             </nav>
                         </div>
                         <div class="sb-sidenav-menu-heading">Settings</div>

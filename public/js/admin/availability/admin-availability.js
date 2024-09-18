@@ -19,6 +19,9 @@ document.addEventListener("DOMContentLoaded", function () {
     const confirmYesButton = document.getElementById("confirm-yes");
     const confirmNoButton = document.getElementById("confirm-no");
 
+    const closeSuccessModalButton = document.getElementById("close-success-modal");
+    const successModal = document.getElementById("success-modal");
+
     const months = [
         "January", "February", "March", "April", "May", "June",
         "July", "August", "September", "October", "November", "December"
@@ -283,6 +286,18 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }    
 
+    if (closeSuccessModalButton) {
+        closeSuccessModalButton.addEventListener("click", () => {
+            successModal.classList.add("hidden");
+        });
+    } else {
+        console.error('Close success modal button not found');
+    }
+    
+    function handleFormSuccess() {
+        successModal.classList.remove("hidden");
+    }
+
     availabilityForm.addEventListener("submit", function (event) {
         event.preventDefault();
         clearErrors();
@@ -336,6 +351,7 @@ document.addEventListener("DOMContentLoaded", function () {
                         if (data.success) {
                             displayFormMessage("Availability saved successfully.", "success");
                             hideModal();
+                            handleFormSuccess();
 
                             document.getElementById("availability_date").value = "";
                             document.getElementById("available_time").value = "";

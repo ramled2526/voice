@@ -70,7 +70,15 @@
             </div>
         </div>
     </div>
-
+    <!-- Success Modal -->
+<div id="success-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-gray-800 bg-opacity-75">
+    <div class="bg-white p-6 rounded-lg shadow-lg">
+        <p id="success-message" class="text-lg text-center mb-4">Availability saved successfully.</p>
+        <div class="flex justify-center">
+            <button id="close-success-modal" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">OK</button>
+        </div>
+    </div>
+</div>
     <!-- Availability Modal -->
     <div id="availability-modal" class="fixed inset-0 bg-gray-800 bg-opacity-75 flex items-center justify-center hidden">
         <div class="bg-white p-4 rounded-lg shadow-lg max-w-4xl">

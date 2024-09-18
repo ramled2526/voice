@@ -40,9 +40,9 @@
                 <tbody>
                     @foreach ($students as $student)
                         <tr>
-                            <td>{{ $student->lastname }}</td>
-                            <td>{{ $student->firstname }}</td>
-                            <td>{{ $student->middlename }}</td>
+                            <td>{{ $student->student_lastname }}</td>
+                            <td>{{ $student->student_firstname }}</td>
+                            <td>{{ $student->student_middlename }}</td>
                             <td>{{ $student->student_id }}</td>
                             <td>{{ $student->course }}</td>
                             <td>{{ $student->year_section }}</td>
@@ -78,15 +78,15 @@
                         @method('PUT')
                         <div class="mb-3">
                             <label for="lastname" class="form-label">Lastname</label>
-                            <input type="text" class="form-control" id="lastname" name="lastname" required>
+                            <input type="text" class="form-control" id="student_lastname" name="lastname" required>
                         </div>
                         <div class="mb-3">
                             <label for="firstname" class="form-label">Firstname</label>
-                            <input type="text" class="form-control" id="firstname" name="firstname" required>
+                            <input type="text" class="form-control" id="student_firstname" name="firstname" required>
                         </div>
                         <div class="mb-3">
                             <label for="middlename" class="form-label">Middlename</label>
-                            <input type="text" class="form-control" id="middlename" name="middlename" required>
+                            <input type="text" class="form-control" id="student_middlename" name="middlename" required>
                         </div>
                         <div class="mb-3">
                             <label for="student_id" class="form-label">Student ID</label>
@@ -121,15 +121,15 @@
                         @csrf
                         <div class="mb-3">
                             <label for="lastname" class="form-label">Lastname</label>
-                            <input type="text" class="form-control" id="lastname" name="lastname" required>
+                            <input type="text" class="form-control" id="student_lastname" name="lastname" required>
                         </div>
                         <div class="mb-3">
                             <label for="firstname" class="form-label">Firstname</label>
-                            <input type="text" class="form-control" id="firstname" name="firstname" required>
+                            <input type="text" class="form-control" id="student_firstname" name="firstname" required>
                         </div>
                         <div class="mb-3">
                             <label for="middlename" class="form-label">Middlename</label>
-                            <input type="text" class="form-control" id="middlename" name="middlename" required>
+                            <input type="text" class="form-control" id="student_middlename" name="middlename" required>
                         </div>
                         <div class="mb-3">
                             <label for="student_id" class="form-label">Student ID</label>

@@ -40,6 +40,13 @@ document.addEventListener('DOMContentLoaded', function () {
             deleteAvailId = null;
         });
     }
+
+    const deleteVoucherModal = document.getElementById('deleteVoucherModal');
+    if (deleteVoucherModal) {
+        deleteVoucherModal.addEventListener('hidden.bs.modal', function () {
+            deleteVoucherId = null;
+        });
+    }
 });
 
 // Set delete functions
@@ -71,6 +78,12 @@ function setDeleteAvail(availId) {
     deleteAvailId = availId;
     const form = document.getElementById('deleteAvailForm');
     if (form) form.action = `/availability/${availId}`;
+}
+
+function setDeleteVoucher(voucherId) {
+    deleteVoucherId = voucherId;
+    const form = document.getElementById('deleteVoucherForm');
+    if (form) form.action = `/voucher/${voucherId}`;
 }
 
 function showEditAppointModal(appoint) {

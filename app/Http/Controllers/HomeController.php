@@ -10,4 +10,12 @@ class HomeController extends Controller
     {
         return view('home');
     }
+    public function show()
+    {
+        return view('select-user.registration');
+    }
+    public function view()
+    {
+        return view('view-profile.login');
+    }
 }

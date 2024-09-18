@@ -3,12 +3,12 @@ document.addEventListener('DOMContentLoaded', async function () {
     let audioChunks = [];
     let audioContext;
     let source;
-    const startButton = document.getElementById('start-recording');
-    const stopButton = document.getElementById('stop-recording');
-    const resetButton = document.getElementById('reset-recording');
-    const audioPlayback = document.getElementById('audio-playback');
-    const voiceDataInput = document.getElementById('voice-data');
-    const downloadLinkContainer = document.getElementById('download-link-container');
+    const startButton = document.getElementById('start_recording');
+    const stopButton = document.getElementById('stop_recording');
+    const resetButton = document.getElementById('reset_recording');
+    const audioPlayback = document.getElementById('audio_playback');
+    const voiceDataInput = document.getElementById('voice_data');
+    const downloadLinkContainer = document.getElementById('download_link_container');
 
     startButton.addEventListener('click', async () => {
         try {

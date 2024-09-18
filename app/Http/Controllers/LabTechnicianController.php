@@ -14,18 +14,19 @@ class LabTechnicianController extends Controller
     }
     public function store(Request $request)
     {
+      try {
         $rules = [
-            'lastname' => ['required', 'regex:/^([A-Z][a-z]+)(\s[A-Z][a-z]+)*$/'],
-            'firstname' => ['required', 'regex:/^([A-Z][a-z]+)(\s[A-Z][a-z]+)*$/'],
-            'middlename' => ['required', 'regex:/^([A-Z][a-z]+)(\s[A-Z][a-z]+)*$|^None$/'],
+            'technician_lastname' => ['required', 'regex:/^([A-Z][a-z]+)(\s[A-Z][a-z]+)*$/'],
+            'technician_firstname' => ['required', 'regex:/^([A-Z][a-z]+)(\s[A-Z][a-z]+)*$/'],
+            'technician_middlename' => ['required', 'regex:/^([A-Z][a-z]+)(\s[A-Z][a-z]+)*$|^None$/'],
             'technician_id' => 'required|string|max:255|unique:reg_instructors,instructor_id',
             'voice_recording' => 'required|string', // Changed to string to handle base64 data
         ];
     
         $messages = [
-            'lastname.regex' => 'Lastname must start with a capital letter.',
-            'firstname.regex' => 'Firstname must start with a capital letter.',
-            'middlename.regex' => 'Middlename must be a full name or "None".',
+            'technician_lastname.regex' => 'Lastname must start with a capital letter.',
+            'technician_firstname.regex' => 'Firstname must start with a capital letter.',
+            'technician_middlename.regex' => 'Middlename must be a full name or "None".',
             'voice_recording.required' => 'Voice recording is required.',
         ];
     
@@ -47,7 +48,17 @@ class LabTechnicianController extends Controller
         $labtechnician = new LabTech($validated);
         $labtechnician->save();
     
-        return redirect()->route('technician.form')->with('success', 'Laboratory Technician registered successfully.');
+        return response()->json([
+            'success' => true,
+            'message' => 'Instructor registered successfully.'
+        ]);
+    } catch (\Exception $e) {
+        \Log::error($e->getMessage()); // Log the error
+        return response()->json([
+            'success' => false,
+            'message' => 'An error occurred: ' . $e->getMessage(),
+        ], 500);
+      }
     }
     public function index()
     {
@@ -61,9 +72,9 @@ class LabTechnicianController extends Controller
     public function update(Request $request, LabTech $technician)
     {
         $validatedData = $request->validate([
-            'lastname' => 'required',
-            'firstname' => 'required',
-            'middlename' => 'required',
+            'technician_lastname' => 'required',
+            'technician_firstname' => 'required',
+            'technician_middlename' => 'required',
             'technician_id' => 'required|unique:reg_technician,technician_id,' . $technician->id,
         ]);
     

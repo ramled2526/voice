@@ -36,9 +36,9 @@
                 <tbody>
                     @foreach ($technicians as $technician)
                         <tr>
-                            <td>{{ $technician->lastname }}</td>
-                            <td>{{ $technician->firstname }}</td>
-                            <td>{{ $technician->middlename }}</td>
+                            <td>{{ $technician->technician_lastname }}</td>
+                            <td>{{ $technician->technician_firstname }}</td>
+                            <td>{{ $technician->technician_middlename }}</td>
                             <td>{{ $technician->technician_id }}</td>
                             <td>{{ $technician->voice_recording }}</td>
                             <td>{{ $technician->created_at }}</td>
@@ -74,15 +74,15 @@
                         @method('PUT')
                         <div class="mb-3">
                             <label for="lastname" class="form-label">Lastname</label>
-                            <input type="text" class="form-control" id="lastname" name="lastname" required>
+                            <input type="text" class="form-control" id="technician_lastname" name="lastname" required>
                         </div>
                         <div class="mb-3">
                             <label for="firstname" class="form-label">Firstname</label>
-                            <input type="text" class="form-control" id="firstname" name="firstname" required>
+                            <input type="text" class="form-control" id="technician_firstname" name="firstname" required>
                         </div>
                         <div class="mb-3">
                             <label for="middlename" class="form-label">Middlename</label>
-                            <input type="text" class="form-control" id="middlename" name="middlename" required>
+                            <input type="text" class="form-control" id="technician_middlename" name="middlename" required>
                         </div>
                         <div class="mb-3">
                             <label for="technician_id" class="form-label">Technician ID</label>

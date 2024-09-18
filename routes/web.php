@@ -16,10 +16,11 @@ Route::get('/', function () {
 });
 
 Route::get('/', [HomeController::class, 'index']);
+Route::get('/select-user.registration', [HomeController::class, 'show'])->name('select-user.registration');
 
 Route::get('/student.index', [StudentController::class, 'index'])->name("student.index");
 Route::get('/student', [StudentController::class, 'student'])->name('student.student');
-Route::post('/student', [StudentController::class, 'save'])->name('student.save');
+Route::post('/student', [StudentController::class, 'save']);
 Route::get('/student.create', [StudentController::class, 'create'])->name('student.create');
 Route::post('/student.store', [StudentController::class, 'store'])->name('student.store');
 Route::get('/student.edit', [StudentController::class, 'edit'])->name('student.edit');
@@ -27,14 +28,14 @@ Route::put('/student/{student}', [StudentController::class, 'update'])->name('st
 Route::delete('/student/{student}', [StudentController::class, 'delete'])->name('student.delete');
 
 Route::get('/instructor', [InstructorController::class, 'instructor'])->name('instructor.form');
-Route::post('/instructor.store', [InstructorController::class, 'store'])->name('instructor.store');
+Route::post('/instructor', [InstructorController::class, 'store']);
 Route::get('/instructor.index', [InstructorController::class, 'index'])->name('instructor.index');
 Route::get('/instructor.edit', [InstructorController::class, 'edit'])->name('instructor.edit');
 Route::put('/instructor/{instructor}', [InstructorController::class, 'update'])->name('instructor.update');
 Route::delete('/instructor/{instructor}', [InstructorController::class, 'delete'])->name('instructor.delete');
 
 Route::get('/technician', [LabTechnicianController::class, 'technician'])->name('technician.form');
-Route::post('/technician.store', [LabTechnicianController::class, 'store'])->name('technician.store');
+Route::post('/technician', [LabTechnicianController::class, 'store']);
 Route::get('/technician.index', [LabTechnicianController::class, 'index'])->name('technician.index');
 Route::get('/technician.edit', [LabTechnicianController::class, 'edit'])->name('technician.edit');
 Route::put('/technician/{technician}', [LabTechnicianController::class, 'update'])->name('technician.update');
@@ -47,7 +48,7 @@ Route::get('/admin.dashboard', [DashboardController::class, 'index'])->name('adm
 
 Route::get('/appoint/booking', [AppointmentController::class, 'show'])->name('appoint.booking');
 Route::post('/appointment', [AppointmentController::class, 'store']);
-Route::get('/availability/{year}/{month}', [AppointmentController::class, 'fetchAvailability']);
+Route::get('/availability/{year}/{month}', [AppointmentController::class, 'getAvailability']);
 Route::get('/appoint.student', [AppointmentController::class, 'index'])->name('appoint.student');
 Route::get('/appoint.edit', [AppointmentController::class, 'edit'])->name('appoint.edit');
 Route::put('/appoint/{appoint}', [AppointmentController::class, 'update'])->name('appoint.update');
@@ -64,6 +65,11 @@ Route::delete('/availability/{id}', [AvailabilityController::class, 'delete'])->
 
 Route::get('/voucher/generate', [VoucherController::class, 'generate'])->name('voucher.generate');
 Route::post('/voucher', [VoucherController::class, 'store']);
+Route::get('/voucher.index', [VoucherController::class, 'index'])->name('voucher.index');
+Route::delete('/voucher/{voucher}', [VoucherController::class, 'delete'])->name('voucher.delete');
+
+Route::get('/view-profile', [HomeController::class, 'view'])->name('view-profile.login');
+
 
 
 

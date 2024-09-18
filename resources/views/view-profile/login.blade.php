@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Login</title>
+    <title>User Login</title>
     @vite('resources/css/tailwind.css')
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -23,8 +23,8 @@
                 <img src="images/ccs-logo.png" alt="Logo" class="mx-auto mb-6 w-40 h-32 object-contain">
                 <h4 class="text-2xl font-bold whitespace-nowrap">College of Computer Studies</h4>
                 <p class="text-gray-500 mb-4">Camarines Sur Polytechnic Colleges</p>
-                <div class="font-semibold text-lg mb-4">Admin Login</div>
-                <form action="{{ route('admin-login') }}" method="POST">
+                <div class="font-semibold text-lg mb-4">User Login</div>
+                <form action="{{ route('view-profile.login') }}" method="POST">
                     @csrf
                     <div class="mb-4 relative">
                         <input type="text" id="username" name="username" class="w-full border border-gray-300 rounded-md py-2 pl-10 pr-3 focus:outline-none focus:border-blue-500" placeholder="Username" required>
@@ -55,6 +55,6 @@
         </div>
     </div>
 </div>
-<script src="{{ asset('js/admin/admin-login/login.js') }}"></script>
+<script src="{{ asset('js/') }}"></script>
 </body>
 </html>

@@ -10,7 +10,6 @@ use Illuminate\Support\Str;
 
 class VoucherController extends Controller
 {
-    // Display the voucher generation view
     public function generate()
     {
         return view('voucher.generate'); 
@@ -30,5 +29,16 @@ class VoucherController extends Controller
 
         return response()->json(['success' => true]);
     }
+    public function index()
+    {
+        $generate = Voucher::all();
+        return view('voucher.index', compact('generate'));
+    }
+    public function delete(Voucher $voucher)
+    {
+        $voucher->delete();
 
+        return redirect()->route('voucher.index')->with('success', 'Generated code deleted successfully.');
+    }
+   
 }
