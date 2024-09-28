@@ -13,10 +13,8 @@ class Student extends Model
         'student_lastname',
         'student_firstname',
         'student_middlename',
-        'student_id',
-        'password',  
+        'student_id', 
         'course',
         'year_section',
-        'picture',
     ];
 }

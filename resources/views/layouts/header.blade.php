@@ -26,6 +26,12 @@
             <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
                 <div class="sb-sidenav-menu">
                     <div class="nav">
+
+                        <div class="flex flex-col justify-center items-center mb-4">
+                            <img src="{{ asset('images/ccs-logo.png') }}" alt="Logo" class="h-16 w-auto">
+                            <span class="text-3xl font-extrabold mt-2" style="font-family: 'Courier New', Courier, monospace;">Astrazon</span>
+                        </div>
+
                         <a class="nav-link" href="{{ route('admin.dashboard')}}">
                             <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                             Dashboard

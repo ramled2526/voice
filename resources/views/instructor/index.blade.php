@@ -60,9 +60,10 @@
                             <td>{{ $instructor->created_at }}</td>
                             <td>
                                 <div class="d-flex">
-                                    <button type="button" class="btn btn-warning btn-sm me-2" onclick="showEditInstructorModal({{ $instructor->id }})">
+                                    <button type="button" class="btn btn-warning btn-sm me-2" onclick="showEditInstructorModal({{ json_encode($instructor) }})">
                                         <i class="bi bi-pencil"></i> Edit Instructor
                                     </button>
+
                                     <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteInstructorModal" onclick="setDeleteInstructor({{ $instructor->id }})">
                                         <i class="bi bi-trash"></i> Delete Instructor
                                     </button>
@@ -88,16 +89,16 @@
                         @csrf
                         @method('PUT')
                         <div class="mb-3">
-                            <label for="lastname" class="form-label">Lastname</label>
-                            <input type="text" class="form-control" id="instructor_lastname" name="lastname" required>
+                            <label for="instructor_lastname" class="form-label">Lastname</label>
+                            <input type="text" class="form-control" id="instructor_lastname" name="instructor_lastname" required>
                         </div>
                         <div class="mb-3">
-                            <label for="firstname" class="form-label">Firstname</label>
-                            <input type="text" class="form-control" id="instructor_firstname" name="firstname" required>
+                            <label for="instructor_firstname" class="form-label">Firstname</label>
+                            <input type="text" class="form-control" id="instructor_firstname" name="instructor_firstname" required>
                         </div>
                         <div class="mb-3">
-                            <label for="middlename" class="form-label">Middlename</label>
-                            <input type="text" class="form-control" id="instructor_middlename" name="middlename" required>
+                            <label for="instructor_middlename" class="form-label">Middlename</label>
+                            <input type="text" class="form-control" id="instructor_middlename" name="instructor_middlename" required>
                         </div>
                         <div class="mb-3">
                             <label for="instructor_id" class="form-label">Instructor ID</label>

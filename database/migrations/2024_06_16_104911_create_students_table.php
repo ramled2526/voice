@@ -17,10 +17,8 @@ return new class extends Migration
             $table->string('student_firstname');
             $table->string('student_middlename')->nullable();
             $table->string('student_id')->unique();
-            $table->string('password');  
             $table->string('course');
             $table->string('year_section');
-            $table->string('picture'); 
             $table->timestamps();
         });
     }

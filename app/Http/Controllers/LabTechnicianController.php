@@ -20,13 +20,14 @@ class LabTechnicianController extends Controller
             'technician_firstname' => ['required', 'regex:/^([A-Z][a-z]+)(\s[A-Z][a-z]+)*$/'],
             'technician_middlename' => ['required', 'regex:/^([A-Z][a-z]+)(\s[A-Z][a-z]+)*$|^None$/'],
             'technician_id' => 'required|string|max:255|unique:reg_instructors,instructor_id',
-            'voice_recording' => 'required|string', // Changed to string to handle base64 data
+            'voice_recording' => 'required|string', 
         ];
     
         $messages = [
             'technician_lastname.regex' => 'Lastname must start with a capital letter.',
             'technician_firstname.regex' => 'Firstname must start with a capital letter.',
             'technician_middlename.regex' => 'Middlename must be a full name or "None".',
+            'technician_id.regex' => 'Technician ID is required.',
             'voice_recording.required' => 'Voice recording is required.',
         ];
     
@@ -38,7 +39,7 @@ class LabTechnicianController extends Controller
             $audio = base64_decode($base64Audio);
     
             // Use the lastname for the filename
-            $filename = preg_replace('/\s+/', '_', strtolower($validated['lastname'])) . '_' . uniqid() . '.wav';
+            $filename = preg_replace('/\s+/', '_', strtolower($validated['technician_lastname'])) . '_' . uniqid() . '.wav';
             $path = 'voice_recordings/' . $filename;
             Storage::disk('public')->put($path, $audio);
             $validated['voice_recording'] = $path;
@@ -50,7 +51,7 @@ class LabTechnicianController extends Controller
     
         return response()->json([
             'success' => true,
-            'message' => 'Instructor registered successfully.'
+            'message' => 'Technician registered successfully.'
         ]);
     } catch (\Exception $e) {
         \Log::error($e->getMessage()); // Log the error

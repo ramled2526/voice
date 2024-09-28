@@ -17,7 +17,7 @@
         <header class="bg-white shadow text-center h-14 flex items-center justify-center mb-6 relative">
             <!-- Back Button -->
             <a href="/" class="absolute left-4 text-blue-600 hover:text-white text-lg 
-                px-1 py-0 bg-gray-100 hover:bg-blue-600 rounded-md transition duration-300 ease-in-out shadow-sm">
+                px-1 py-0 bg-gray-100 hover:bg-yellow-600 rounded-md transition duration-300 ease-in-out shadow-sm">
                 &larr; 
             </a>
             <h2 class="text-xl font-bold leading-relaxed">Make an Appointment</h2>
@@ -27,7 +27,7 @@
         <main class="flex-grow flex flex-col items-center py-8 px-4 md:px-8">
             <!-- Calendar Container -->
             <div class="calendar-container bg-white shadow-lg overflow-hidden w-full max-w-4xl lg:max-w-5xl xl:max-w-6xl">
-                <header class="bg-blue-300 text-white py-4 text-center">
+                <header class="bg-yellow-200 text-black py-4 text-center">
                     <div class="flex justify-between items-center px-4">
                         <button id="prev-month" class="text-xl">&lt;</button>
                         <span id="month-year" class="text-xl font-bold"></span>

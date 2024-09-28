@@ -73,16 +73,16 @@
                         @csrf
                         @method('PUT')
                         <div class="mb-3">
-                            <label for="lastname" class="form-label">Lastname</label>
-                            <input type="text" class="form-control" id="technician_lastname" name="lastname" required>
+                            <label for="technician_lastname" class="form-label">Lastname</label>
+                            <input type="text" class="form-control" id="technician_lastname" name="technician_lastname" required>
                         </div>
                         <div class="mb-3">
-                            <label for="firstname" class="form-label">Firstname</label>
-                            <input type="text" class="form-control" id="technician_firstname" name="firstname" required>
+                            <label for="technician_firstname" class="form-label">Firstname</label>
+                            <input type="text" class="form-control" id="technician_firstname" name="technician_firstname" required>
                         </div>
                         <div class="mb-3">
-                            <label for="middlename" class="form-label">Middlename</label>
-                            <input type="text" class="form-control" id="technician_middlename" name="middlename" required>
+                            <label for="technician_middlename" class="form-label">Middlename</label>
+                            <input type="text" class="form-control" id="technician_middlename" name="technician_middlename" required>
                         </div>
                         <div class="mb-3">
                             <label for="technician_id" class="form-label">Technician ID</label>

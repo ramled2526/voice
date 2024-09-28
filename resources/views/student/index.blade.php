@@ -77,16 +77,16 @@
                         @csrf
                         @method('PUT')
                         <div class="mb-3">
-                            <label for="lastname" class="form-label">Lastname</label>
-                            <input type="text" class="form-control" id="student_lastname" name="lastname" required>
+                            <label for="student_lastname" class="form-label">Lastname</label>
+                            <input type="text" class="form-control" id="student_lastname" name="student_lastname" required>
                         </div>
                         <div class="mb-3">
-                            <label for="firstname" class="form-label">Firstname</label>
-                            <input type="text" class="form-control" id="student_firstname" name="firstname" required>
+                            <label for="student_firstname" class="form-label">Firstname</label>
+                            <input type="text" class="form-control" id="student_firstname" name="student_firstname" required>
                         </div>
                         <div class="mb-3">
-                            <label for="middlename" class="form-label">Middlename</label>
-                            <input type="text" class="form-control" id="student_middlename" name="middlename" required>
+                            <label for="student_middlename" class="form-label">Middlename</label>
+                            <input type="text" class="form-control" id="student_middlename" name="student_middlename" required>
                         </div>
                         <div class="mb-3">
                             <label for="student_id" class="form-label">Student ID</label>
@@ -120,16 +120,16 @@
                     <form method="POST" action="{{ route('student.store') }}">
                         @csrf
                         <div class="mb-3">
-                            <label for="lastname" class="form-label">Lastname</label>
-                            <input type="text" class="form-control" id="student_lastname" name="lastname" required>
+                            <label for="student_lastname" class="form-label">Lastname</label>
+                            <input type="text" class="form-control" id="student_lastname" name="student_lastname" required>
                         </div>
                         <div class="mb-3">
-                            <label for="firstname" class="form-label">Firstname</label>
-                            <input type="text" class="form-control" id="student_firstname" name="firstname" required>
+                            <label for="student_firstname" class="form-label">Firstname</label>
+                            <input type="text" class="form-control" id="student_firstname" name="student_firstname" required>
                         </div>
                         <div class="mb-3">
-                            <label for="middlename" class="form-label">Middlename</label>
-                            <input type="text" class="form-control" id="student_middlename" name="middlename" required>
+                            <label for="student_middlename" class="form-label">Middlename</label>
+                            <input type="text" class="form-control" id="student_middlename" name="student_middlename" required>
                         </div>
                         <div class="mb-3">
                             <label for="student_id" class="form-label">Student ID</label>

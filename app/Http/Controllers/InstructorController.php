@@ -12,7 +12,6 @@ class InstructorController extends Controller
     {
         return view('instructor.form');
     }
-
     public function store(Request $request)
     {
         try {
@@ -32,7 +31,7 @@ class InstructorController extends Controller
             ];
 
             $validated = $request->validate($rules, $messages);
-        
+
             if ($request->filled('voice_recording')) {
                 $base64Audio = $request->input('voice_recording');
                 $audio = base64_decode($base64Audio);
@@ -52,14 +51,13 @@ class InstructorController extends Controller
                 'message' => 'Instructor registered successfully.'
             ]);
         } catch (\Exception $e) {
-            \Log::error($e->getMessage()); // Log the error
+            \Log::info($e->getMessage()); 
             return response()->json([
                 'success' => false,
                 'message' => 'An error occurred: ' . $e->getMessage(),
             ], 500);
         }
     }
-
     public function index()
     {
         $instructors = Instructor::all();

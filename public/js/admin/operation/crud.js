@@ -118,9 +118,9 @@ function showEditAvailModal(availability) {
 
 function showEditStudentModal(student) {
 
-    document.getElementById('lastname').value = student.lastname;
-    document.getElementById('firstname').value = student.firstname;
-    document.getElementById('middlename').value = student.middlename;
+    document.getElementById('student_lastname').value = student.student_lastname;
+    document.getElementById('student_firstname').value = student.student_firstname;
+    document.getElementById('student_middlename').value = student.student_middlename;
     document.getElementById('student_id').value = student.student_id;
     document.getElementById('course').value = student.course;
     document.getElementById('year_section').value = student.year_section;
@@ -131,9 +131,9 @@ function showEditStudentModal(student) {
 }
 
 function showEditInstructorModal(instructor) {
-    document.getElementById('lastname').value = instructor.lastname;
-    document.getElementById('firstname').value = instructor.firstname;
-    document.getElementById('middlename').value = instructor.middlename;
+    document.getElementById('instructor_lastname').value = instructor.instructor_lastname;
+    document.getElementById('instructor_firstname').value = instructor.instructor_firstname;
+    document.getElementById('instructor_middlename').value = instructor.instructor_middlename;
     document.getElementById('instructor_id').value = instructor.instructor_id;
 
     document.getElementById('editInstructorForm').action = '/instructor/' + instructor.id;
@@ -142,9 +142,9 @@ function showEditInstructorModal(instructor) {
 }
 
 function showEditTechnicianModal(technician) {
-    document.getElementById('lastname').value = technician.lastname;
-    document.getElementById('firstname').value = technician.firstname;
-    document.getElementById('middlename').value = technician.middlename;
+    document.getElementById('technician_lastname').value = technician.technician_lastname;
+    document.getElementById('technician_firstname').value = technician.technician_firstname;
+    document.getElementById('technician_middlename').value = technician.technician_middlename;
     document.getElementById('technician_id').value = technician.technician_id;
 
     document.getElementById('editTechnicianForm').action = '/technician/' + technician.id;

@@ -14,100 +14,53 @@
 
     <div id="successMessage" class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-4 hidden"></div>
 
-    @if (session('success'))
-        <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-4">
-            {{ session('success') }}
-        </div>
-    @endif
-
-    @if ($errors->any())
-        <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
-            <ul class="list-disc list-inside">
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
-
     <form id="registrationForm">
         @csrf
         <div class="mb-4">
-            <input type="text" id="student_lastname" name="lastname" placeholder="Lastname" value="{{ old('lastname') }}"
-                required
-                class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 @error('lastname') border-red-500 @enderror h-10">
-            @error('lastname')
-                <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
-            @enderror
+            <input type="text" id="student_lastname" name="student_lastname" placeholder="Lastname" value="{{ old('student_lastname') }}"
+                class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 h-10">
+            <p id="lastnameError" class="text-red-500 text-xs mt-1"></p>
         </div>
 
         <div class="mb-4">
-            <input type="text" id="student_firstname" name="firstname" placeholder="Firstname" value="{{ old('firstname') }}"
-                required
-                class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 @error('firstname') border-red-500 @enderror h-10">
-            @error('firstname')
-                <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
-            @enderror
+            <input type="text" id="student_firstname" name="student_firstname" placeholder="Firstname" value="{{ old('student_firstname') }}"
+                class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 h-10">
+            <p id="firstnameError" class="text-red-500 text-xs mt-1"></p>
         </div>
 
         <div class="mb-4">
-            <input type="text" id="student_middlename" name="middlename" placeholder="Middlename"
-                value="{{ old('middlename') }}" required
-                class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 @error('middlename') border-red-500 @enderror h-10">
-            @error('middlename')
-                <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
-            @enderror
+            <input type="text" id="student_middlename" name="student_middlename" placeholder="Middlename"
+                value="{{ old('student_middlename') }}"
+                class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 h-10">
+            <p id="middlenameError" class="text-red-500 text-xs mt-1"></p>
         </div>
-
+        
         <div class="mb-4">
             <input type="text" id="student_id" name="student_id" placeholder="Student ID"
-                value="{{ old('student_id') }}" required
-                class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 @error('student_id') border-red-500 @enderror h-10">
-            @error('student_id')
-                <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
-            @enderror
+                value="{{ old('student_id') }}"
+                class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 h-10">
+            <p id="studentIdError" class="text-red-500 text-xs mt-1"></p>
         </div>
 
         <div class="mb-4">
-            <input type="password" id="password" name="password" placeholder="Password" required
-                class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 @error('password') border-red-500 @enderror h-10">
-            @error('password')
-                <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
-            @enderror
-        </div>
-
-        <div class="mb-4">
-            <select id="course" name="course" required
-                class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 @error('course') border-red-500 @enderror appearance-none h-10">
-                <option value="" disabled {{ old('course') ? '' : 'selected' }}>Course</option>
-                <option value="BSIT" @if (old('course') == 'BSIT') selected @endif>Bachelor of Science in Information Technology (BSIT)</option>
-                <option value="BSCS" @if (old('course') == 'BSCS') selected @endif>Bachelor of Science in Computer Science (BSCS)</option>
-                <option value="BSIS" @if (old('course') == 'BSIS') selected @endif>Bachelor of Science in Information System (BSIS)</option>
-                <option value="BLIS" @if (old('course') == 'BLIS') selected @endif>Bachelor of Library and Information Science (BLIS)</option>
+            <select id="course" name="course"
+                class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 appearance-none h-10">
+                <option value="" disabled selected>Course</option>
+                <option value="BSIT">Bachelor of Science in Information Technology (BSIT)</option>
+                <option value="BSCS">Bachelor of Science in Computer Science (BSCS)</option>
+                <option value="BSIS">Bachelor of Science in Information System (BSIS)</option>
+                <option value="BLIS">Bachelor of Library and Information Science (BLIS)</option>
             </select>
-            @error('course')
-                <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
-            @enderror
+            <p id="courseError" class="text-red-500 text-xs mt-1"></p>
         </div>
 
         <div class="mb-6">
             <input type="text" id="year_section" name="year_section" placeholder="Year and Section"
-                value="{{ old('year_section') }}" required
-                class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 @error('year_section') border-red-500 @enderror h-10">
-            @error('year_section')
-                <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
-            @enderror
+                value="{{ old('year_section') }}"
+                class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 h-10">
+            <p id="yearSectionError" class="text-red-500 text-xs mt-1"></p>
         </div>
 
-        <div class="mb-4 relative">
-            <input type="file" id="picture" name="picture" accept="image/*" required
-                class="block w-full px-3 py-2 pl-32 border border-gray-300 rounded-md shadow-sm text-gray-500 focus:outline-none focus:ring-blue-500 focus:border-blue-500 @error('picture') border-red-500 @enderror">
-            <label for="picture" class="absolute inset-y-0 left-3 flex items-center text-gray-500 pointer-events-none">Upload Image</label>
-            @error('picture')
-                <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
-            @enderror
-        </div>
-        
         <button type="button" onclick="showConfirmationModal()" class="w-full bg-yellow-700 text-white py-2 hover:bg-yellow-800">Register</button>
     </form>
 </div>

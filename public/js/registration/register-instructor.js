@@ -1,6 +1,59 @@
 document.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById('instForm');
+
+    function validateInstructorForm() {
+        let isValid = true;
+
+        // Clear previous errors
+        document.querySelectorAll('.text-red-500').forEach(el => el.innerHTML = '');
+
+        // Validate Lastname
+        const instructor_lastname = document.getElementById('instructor_lastname')?.value.trim();
+        const instructor_lastnameError = document.getElementById('instructor_lastnameError');
+        if (!instructor_lastname.match(/^([A-Z][a-z]+)(\s[A-Z][a-z]+)*$/)) {
+            instructor_lastnameError.innerHTML = 'Lastname must start with a capital letter.';
+            isValid = false;
+        }
+
+        // Validate Firstname
+        const instructor_firstname = document.getElementById('instructor_firstname')?.value.trim();
+        const instructor_firstnameError = document.getElementById('instructor_firstnameError');
+        if (!instructor_firstname.match(/^([A-Z][a-z]+)(\s[A-Z][a-z]+)*$/)) {
+            instructor_firstnameError.innerHTML = 'Firstname must start with a capital letter.';
+            isValid = false;
+        }
+
+        // Validate Middlename
+        const instructor_middlename = document.getElementById('instructor_middlename')?.value.trim();
+        const instructor_middlenameError = document.getElementById('instructor_middlenameError');
+        if (instructor_middlename && !instructor_middlename.match(/^([A-Z][a-z]+)(\s[A-Z][a-z]+)*$|^None$/)) {
+            instructor_middlenameError.innerHTML = 'Middlename must be a full name or "None".';
+            isValid = false;
+        }
+
+        // Validate Instructor ID
+        const instructorId = document.getElementById('instructor_id')?.value.trim();
+        const instructorIdError = document.getElementById('instructorIdError');
+        if (!instructorId) {
+            instructorIdError.innerHTML = 'Instructor ID is required.';
+            isValid = false;
+        }
+
+        // Validate Voice Recording
+        const voiceRecording = document.getElementById('voice-data')?.value.trim(); // Corrected ID reference
+        const voiceRecordingError = document.getElementById('voiceRecordingError');
+        if (!voiceRecording) {
+            voiceRecordingError.innerHTML = 'Voice recording is required.';
+            isValid = false;
+        }
+
+        return isValid;
+    }
+
     window.showInstructorConfirmationModal = function() {
-        document.getElementById('instructorConfirmationModal').classList.remove('hidden');
+        if (validateInstructorForm()) {
+            document.getElementById('instructorConfirmationModal').classList.remove('hidden');
+        }
     }
 
     window.hideInstructorConfirmationModal = function() {
@@ -8,65 +61,50 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     window.submitInstructorForm = function() {
-        const form = document.getElementById('instForm');
-        const successMessageDiv = document.getElementById('instSuccessMessage');
-        const errorMessageDiv = document.getElementById('instFormErrors'); 
-
-        if (form) {
+        if (validateInstructorForm()) {
             const formData = new FormData(form);
             const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-
-            const base64AudioData = document.getElementById('voice-data').value; 
-
-            if (base64AudioData) {
-                document.getElementById('voice-data').value = base64AudioData; 
-            }
-
-            formData.append('lastname', form.lastname.value);
-            formData.append('firstname', form.firstname.value);
-            formData.append('middlename', form.middlename.value);
-            formData.append('instructor_id', form.instructor_id.value);
-            formData.append('voice_recording', base64AudioData); 
-
+    
             fetch('/instructor', {
                 method: 'POST',
+                body: formData,
                 headers: {
-                    'X-Requested-With': 'XMLHttpRequest',
                     'X-CSRF-TOKEN': csrfToken,
-                },
-                body: formData, // Send the form data directly
-            })
-            .then(response => {
-                if (!response.ok) {
-                    return response.text().then(text => {
-                        throw new Error(text);
-                    });
+                    'Accept': 'application/json',
                 }
-                return response.json();
             })
+            .then(response => response.json())
             .then(data => {
-                hideInstructorConfirmationModal();
-            
                 if (data.success) {
-                    successMessageDiv.textContent = data.message;
-                    successMessageDiv.classList.remove('hidden');
-                    errorMessageDiv.classList.add('hidden'); 
-            
-                    form.reset(); 
-                } else if (data.errors) {
-                    let errorMessages = '';
-                    for (let field in data.errors) {
-                        errorMessages += data.errors[field].join(', ') + '\n';
+                    document.getElementById('instructorSuccessMessage').innerHTML = data.message;
+                    document.getElementById('instructorSuccessMessage').classList.remove('hidden');
+                    form.reset();
+                    hideInstructorConfirmationModal();
+    
+                    // Reset voice recording elements
+                    const audioPlayback = document.getElementById('audio-playback');
+                    audioPlayback.src = ''; // Clear the audio source
+                    const voiceDataInput = document.getElementById('voice-data');
+                    voiceDataInput.value = ''; // Clear the hidden voice data input
+    
+                    // Reset buttons
+                    document.getElementById('start-recording').disabled = false;
+                    document.getElementById('stop-recording').disabled = true;
+                    document.getElementById('reset-recording').disabled = true;
+                } else {
+                    if (data.errors) {
+                        for (const [field, messages] of Object.entries(data.errors)) {
+                            const errorField = document.getElementById(`${field}Error`);
+                            if (errorField) {
+                                errorField.innerHTML = messages.join(', '); // Display the error message
+                            }
+                        }
                     }
-                    errorMessageDiv.textContent = errorMessages;
-                    errorMessageDiv.classList.remove('hidden');
                 }
             })
             .catch(error => {
                 console.error('Error:', error);
-                errorMessageDiv.textContent = `Error: ${error.message}`;
-                errorMessageDiv.classList.remove('hidden');
             });
         }
-  } 
+    }    
 });
