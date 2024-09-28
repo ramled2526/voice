@@ -45,7 +45,6 @@ class LabTechnicianController extends Controller
             $validated['voice_recording'] = $path;
         }
     
-        // Save the instructor data
         $labtechnician = new LabTech($validated);
         $labtechnician->save();
     

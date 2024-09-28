@@ -40,7 +40,21 @@
                             <td>{{ $technician->technician_firstname }}</td>
                             <td>{{ $technician->technician_middlename }}</td>
                             <td>{{ $technician->technician_id }}</td>
-                            <td>{{ $technician->voice_recording }}</td>
+                            <td>
+                                @if($technician->voice_recording)
+                                    <!-- Display filename as a clickable link -->
+                                    <a href="{{ asset('storage/' . $technician->voice_recording) }}" target="_blank" class="text-blue-600 hover:underline">
+                                        {{ basename($technician->voice_recording) }}
+                                    </a>
+                                    <!-- Audio element to play the recording -->
+                                    <audio controls class="w-full mt-2">
+                                        <source src="{{ asset('storage/' . $technician->voice_recording) }}" type="audio/wav">
+                                        Your browser does not support the audio element.
+                                    </audio>
+                                @else
+                                    No recording available
+                                @endif
+                            </td>
                             <td>{{ $technician->created_at }}</td>
                             <td>
                                 <div class="d-flex">
